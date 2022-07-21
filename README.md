@@ -8,9 +8,10 @@ Many of the trending languages or framework that are relevant in the US and talk
 
 Coding and learning is really fun, but it is also a lot of commitment in terms of time, so it would be ideal for an automation tool to return to the user a list of relevant skills and knowledge (ordered by descending percentage relevance) to have in a particular field, based on the user's search location.
 
------ The roadmap -----
-First iteration would be to have the CLI web scraper working and returning data based on few parameters an user should input to the program.
+**----- The roadmap -----**
 
-Second iteration would be adding a `.JSON` or `.config` file for a user to fill once and the program to execute routinely without re entering the same informations over again.
+* First iteration would be to have the CLI web scraper working and returning data based on few parameters an user should input to the program.
 
-Third iteration would be implementing it to a Telegram Bot or a GUI, in order to be more generally scoped to non technical people.
+* Second iteration would be adding a `.JSON` or `.config` file for a user to fill once and the program to execute routinely without re entering the same informations over again.
+
+* Third iteration would be implementing it to a Telegram Bot or a GUI, in order to be more generally scoped to non technical people.
