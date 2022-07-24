@@ -13,5 +13,7 @@ Coding and learning is really fun, but it is also a lot of commitment in terms o
 * First iteration would be to have the CLI web scraper working and returning data based on few parameters an user should input to the program.
 
 * Second iteration would be adding a `.JSON` or `.config` file for a user to fill once and the program to execute routinely without re entering the same informations over again.
+    *or evaluate if using a question input() to ask for a personalized search (instead of re configuring the config file)
+
 
 * Third iteration would be implementing it to a Telegram Bot or a GUI, in order to be more generally scoped to non technical people.
