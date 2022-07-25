@@ -1,23 +1,23 @@
 from bs4 import BeautifulSoup
 import requests
+import re
 
 # define brower agent to show
 agent = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0'}
-place = 'Besana+in+Brianza'
-job_search = 'developer+junior'
 
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 
 if __name__ == '__main__':
     def main():
-        # do
+
         job = transform(extract(0))
         for j in job:
             print(j)
             print('\n')
             description = job_analizer(parse_job(j['job_link']))
             print('\n')
+
 
     def format_entry(entry):
         # replace space with '+' from regEx
