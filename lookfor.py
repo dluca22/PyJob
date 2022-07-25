@@ -4,6 +4,8 @@ import requests
 # define brower agent to show
 agent = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0'}
+place = 'Besana+in+Brianza'
+job_search = 'developer+junior'
 
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 
@@ -14,14 +16,22 @@ if __name__ == '__main__':
         for j in job:
             print(j)
             print('\n')
-            description = job_analizer(job['job_link'])
+            description = job_analizer(parse_job(j['job_link']))
             print('\n')
 
+    def format_entry(entry):
+        # replace space with '+' from regEx
+        formatted = re.sub(r"\s+", '+', entry)
+        return formatted
 
     def extract(page):
+        # ask for user input and formats it
+        place = format_entry(input('Where to search? '))
+        job_search = format_entry(input('What to search for? '))
+
         # page 1 starts at 0, then increments of 10
         # ad user input variables for job Position & area as func param
-        url = f'https://it.indeed.com/jobs?q=developer+junior&l=Besana+in+Brianza%2C+Lombardia&start={page}&pp=gQAPAAAAAAAAAAAAAAAB3d8PgwAUAQAEbIA5ge2ct_D9OUJ6C26CwdAAAA&vjk=1034e4c2c9378470'
+        url = f'https://it.indeed.com/jobs?q={job_search}&l={place}%2C+Lombardia&start={page}&pp=gQAPAAAAAAAAAAAAAAAB3d8PgwAUAQAEbIA5ge2ct_D9OUJ6C26CwdAAAA&vjk=1034e4c2c9378470'
 
         r = requests.get(url, agent)
         # returns the DOM object
