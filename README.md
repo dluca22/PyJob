@@ -8,6 +8,12 @@ Many of the trending languages or framework that are relevant in the US and talk
 
 Coding and learning is really fun, but it is also a lot of commitment in terms of time, so it would be ideal for an automation tool to return to the user a list of relevant skills and knowledge (ordered by descending percentage relevance) to have in a particular field, based on the user's search location.
 
+**----- Structure -----**
+`lookfor.py` gets user input and scrapes from indeed the job listing, retrieving the listed jobs.
+After retrieving sends the job description to `analize.py` that computes the texts and outputs the matching relevant data, then logs the most requested languages/frameworks that are being looked for in the job market.
+
+It will output to a text file with some value for most required skills that later will be processed in a more visual representation (like graphs or charts)
+
 **----- The roadmap -----**
 
 * First iteration would be to have the CLI web scraper working and returning data based on few parameters an user should input to the program.
