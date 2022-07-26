@@ -1,4 +1,5 @@
 import re
+from dictionary import languages
 
 
 # gets data from main program and analize the text
@@ -6,7 +7,6 @@ import re
 
 # this should be an helper function, as it sould work independently from the source of the data (in this case indeed, but later should manage the same text from other websites/listing)
 
-list = ['css', 'javascript']
 dict = {
     'css' : 0,
     'javascript' : 0,
@@ -21,9 +21,10 @@ with open("random_listing.txt", 'r') as descr:
     matches = []
 
     # looping over keys in the dict, it assigns the number of times the str gets appended to the matches[] list
-    for keys in dict:
-        matches = re.findall(rf'\b{keys}\b', text)
+    for key in dict:
+        matches = re.findall(rf'\b{key}\b', text)
 
-        dict[keys] = len(matches)
+        dict[key] = len(matches)
 
+        # print(dict)
     print(dict)
