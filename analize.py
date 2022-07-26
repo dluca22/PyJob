@@ -1,4 +1,4 @@
-
+import re
 
 
 # gets data from main program and analize the text
@@ -6,9 +6,24 @@
 
 # this should be an helper function, as it sould work independently from the source of the data (in this case indeed, but later should manage the same text from other websites/listing)
 
+list = ['css', 'javascript']
+dict = {
+    'css' : 0,
+    'javascript' : 0,
+    'android' : 0
+}
 # TO BE REMOVED - just testing read from an example file with a random listing text
 # file I/O is built-in in python
 with open("random_listing.txt", 'r') as descr:
-    # tried to count the words in the file and it works
+    # returns body of text as a 'str'
+    text = descr.read()
+    # list that gets populated by every occurence of the key of the dictionary
+    matches = []
 
-    # to do
+    # looping over keys in the dict, it assigns the number of times the str gets appended to the matches[] list
+    for keys in dict:
+        matches = re.findall(rf'\b{keys}\b', text)
+
+        dict[keys] = len(matches)
+
+    print(dict)

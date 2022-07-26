@@ -25,6 +25,8 @@ il nostro cliente è una software factory attiva da più di 20 anni sul territor
 
 
  soft skills
+  
+javascript
 
  capacità di analisi e modellazione di soluzioni, anche attraverso metafore e astrazioni
  sviluppo di soluzioni sotware con approccio più progettuale che di pura scrittura del codice
