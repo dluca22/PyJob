@@ -17,7 +17,7 @@ il nostro cliente è una software factory attiva da più di 20 anni sul territor
  requisiti richiesti per partecipare alle selezioni
 
  laurea in informatica, ingegneria informatica, matematica, fisica o altre facoltà scientifiche oppure diploma in informatica con brevi esperienze di tirocinio in ambito sviluppo software
- conoscenza di base delle tecnologie web: html 5, css 3, javascript e suoi principali framework (jquery, angular, react)
+ conoscenza di base delle tecnologie web: html 5, css 3,javascripte suoi principali framework (jquery, angular, react)
  conoscenza di base delle tecnologie mobile (android, ios, phonegap, cordova)
  conoscenza di base della programmazione object oriented e dei suoi design patterns
  conoscenza di base di db relazionali (sql, hql) e non relazionali
