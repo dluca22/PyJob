@@ -12,19 +12,30 @@ dict = {
     'javascript' : 0,
     'android' : 0
 }
+# "c++" throws an error, had to change to c+
+# languages is a dict imported from another python file
+
+
+
 # TO BE REMOVED - just testing read from an example file with a random listing text
 # file I/O is built-in in python
-with open("random_listing.txt", 'r') as descr:
-    # returns body of text as a 'str'
-    text = descr.read()
+with open("random_listing2.txt", 'r') as descr:
+    # returns body of text as a 'str' lowercased
+    text = descr.read().lower()
     # list that gets populated by every occurence of the key of the dictionary
     matches = []
 
     # looping over keys in the dict, it assigns the number of times the str gets appended to the matches[] list
-    for key in dict:
+    for key in languages:
         matches = re.findall(rf'\b{key}\b', text)
+        languages[key] = len(matches)
 
-        dict[key] = len(matches)
+    # print only the keys that are not 0
+    for k, v in languages.items():
+        if v != 0:
+            print(k,":", v)
 
-        # print(dict)
-    print(dict)
+
+
+            # TODO only add a +1 value TO the requirement/skill for each listing
+            # one single job offer doesn't have to give like 5 points to "PHP"
