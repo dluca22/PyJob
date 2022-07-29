@@ -1,4 +1,5 @@
 import re
+
 from dictionary import languages
 
 
@@ -7,13 +8,25 @@ from dictionary import languages
 
 # this should be an helper function, as it sould work independently from the source of the data (in this case indeed, but later should manage the same text from other websites/listing)
 
-dict = {
-    'css': 0,
-    'javascript': 0,
-    'android': 0
-}
+
+def percent_calc(dict):
+
+    total = sum(dict.values())
+    for k, v in dict.items():
+        # updates the dict val to 2 decimal float then to string to add '%' sign
+        # dict.update({k : str(float("{:.2f}".format(v *100 / total ))) + ' %'})
+        # only add percent sign to the file writing
+        dict.update({k : float("{:.2f}".format(v *100 / total ))})
+
+    return dict
+
+
+
+
+
+
 # second dictionary with only the non zero values
-results = {}
+res_dict = {}
 
 # "c++" throws an error, had to change to c+
 # languages is a dict imported from another python file
@@ -34,14 +47,20 @@ with open("random_listing2.txt", 'r') as descr:
         if len(matches) >= 1:
             # just add 1 to the dict
             languages[key] = +1
-    with open('results.txt', 'a'):
+            # languages[key] = len(matches) #temp
+    with open('results.txt', 'w') as results:
 
         # print only the keys that are not 0
         for k, v in languages.items():
             if v != 0:
-                # print(k, ":", v)
-                results.keys() = languages[k]
-                results.values() = languages[v]
+                # adds to result dict only the non zero valule
+                res_dict.update({k : v})
 
-        print(results)
+
+        res_dict = percent_calc(res_dict)
+
+        print_to_file(res_dict)
         
+
+
+
