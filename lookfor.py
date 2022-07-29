@@ -1,6 +1,8 @@
+import imp
 from bs4 import BeautifulSoup
 import requests
 import re
+from analize import analisis
 
 # this one gets user input and scrapes the website for job offers
 # then sends to the helper function the description to analize and store relevant data
@@ -11,20 +13,20 @@ agent = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0'}
 
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
-
 if __name__ == '__main__':
     def main():
 
         job = transform(extract(0))
-        count_desc = 0
+
         for j in job:
             # print(j)
             # print('\n')
-            print(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
-            count_desc += 1
-            print('\n')
-            print('=======================================')
-            print('\n')
+            # print(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
+            # count_desc += 1
+            # print('\n')
+            # print('=======================================')
+            # print('\n')
+            analisis(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
 
         print(count_desc)
 
@@ -34,8 +36,8 @@ if __name__ == '__main__':
         return formatted
 
     def extract(page):
-        # ask for user input and formats it
 
+        # ask for user input and formats it
         # TEMPORARY COMMENT
         # place = format_entry(input('Where to search? '))
         # job_search = format_entry(input('What to search for? '))

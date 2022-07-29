@@ -40,19 +40,16 @@ def print_to_file(dictionary, output):
     for k, v in elaborated.items():
             output.write(f"{k} = {v} % \n")
 
-
-
-def main():
+def analisis():
     # second dictionary with only the non zero values
     res_dict = {}
 
     # "c++" throws an error, had to change to c+
     # languages is a dict imported from another python file
 
-
     # TO BE REMOVED - just testing read from an example file with a random listing text
     # file I/O is built-in in python
-    with open("random_listing2.txt", 'r') as descr:
+    with open("random_listing2.txt", 'a') as descr:
         # returns body of text as a 'str' lowercased
         text = descr.read().lower()
         # list that gets populated by every occurence of the key of the dictionary
@@ -64,8 +61,8 @@ def main():
             # if matches creates a list with
             if len(matches) >= 1:
                 # just add 1 to the dict
-                # languages[key] = +1  GIUSTA
-                languages[key] = len(matches) #temp
+                languages[key] = +1
+                # languages[key] = len(matches) #temp
         with open('results.txt', 'w') as output:
 
             # print only the keys that are not 0
@@ -77,6 +74,6 @@ def main():
 
             print_to_file(res_dict, output)
 
-main()
+
 
 
