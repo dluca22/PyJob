@@ -1,0 +1,9 @@
+
+
+Non sono riuscito al momento ad iterare ad ogni passaggio della pagina, devo modificare la helper function  di analize in modo che analize chiama soltanto la funzione di conteggio delle parole e log dentro al dictionary
+e poi dopo aver parsed tra tutte le pagine, chiamare a parte le due funzioni di modifica e riordino e POI print
+se no ogni ovlta riscriveva per ogni listing una nuova list o la appendeva sotto diventando inutile
+
+Ho poi creato un BLOCK of text appendendo tutte le listing per poichiamare analize() su quello  ma mi sono dimenticato che poi analize da solo +1 per listing, che va in conflitto col fatto che ogni listging possa avere piu volte elencata la stessa parola quindi non va bene.
+
+Considerare se fare tutto in live oppure creare diversi file per ogni listing oppure creare un database, ma penso si possa fare benissimo come lo sto facendo tutto in memoria, ma riorganizzando le funzioni e le helper functions calls

@@ -40,7 +40,7 @@ def print_to_file(dictionary, output):
     for k, v in elaborated.items():
             output.write(f"{k} = {v} % \n")
 
-def analisis(text):
+def analisis():
     # second dictionary with only the non zero values
     res_dict = {}
 
@@ -49,30 +49,30 @@ def analisis(text):
 
     # TO BE REMOVED - just testing read from an example file with a random listing text
     # file I/O is built-in in python
-    # with open("random_listing2.txt", 'a') as descr:
-        # returns body of text as a 'str' lowercased
-    text.lower()
-    # list that gets populated by every occurence of the key of the dictionary
-    matches = []
+    with open("block_of_text.txt", 'r') as raw_text:
+            # returns body of text as a 'str' lowercased
+        text = raw_text.read().lower()
+        # list that gets populated by every occurence of the key of the dictionary
+        matches = []
 
-    # looping over keys in the dict, it assigns the number of times the str gets appended to the matches[] list
-    for key in languages:
-        matches = re.findall(rf'\b{key}\b', text)
-        # if matches creates a list with
-        if len(matches) >= 1:
-            # just add 1 to the dict
-            languages[key] = +1
-            # languages[key] = len(matches) #temp
-    with open('results.txt', 'a') as output:
+        # looping over keys in the dict, it assigns the number of times the str gets appended to the matches[] list
+        for key in languages:
+            matches = re.findall(rf'\b{key}\b', text)
+            # if matches creates a list with
+            if len(matches) >= 1:
+                # just add 1 to the dict
+                languages[key] = +1
+                # languages[key] = len(matches) #temp
+        with open('results.txt', 'w') as output:
 
-        # print only the keys that are not 0
-        for k, v in languages.items():
-            if v != 0:
-                # adds to result dict only the non zero valule
-                res_dict.update({k : v})
+            # print only the keys that are not 0
+            for k, v in languages.items():
+                if v != 0:
+                    # adds to result dict only the non zero valule
+                    res_dict.update({k : v})
 
 
-        print_to_file(res_dict, output)
+            print_to_file(res_dict, output)
 
 
 

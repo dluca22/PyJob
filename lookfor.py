@@ -16,18 +16,18 @@ if __name__ == '__main__':
     def main():
 
         job = transform(extract(0))
+        with open('block_of_text.txt', 'w') as raw_text:
+            for j in job:
+                # print(j)
+                # print('\n')
+                # print(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
+                # count_desc += 1
+                # print('\n')
+                # print('=======================================')
+                # print('\n')
+                raw_text.write(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
 
-        for j in job:
-            # print(j)
-            # print('\n')
-            # print(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
-            # count_desc += 1
-            # print('\n')
-            # print('=======================================')
-            # print('\n')
-            analisis(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
-
-        print(count_desc)
+        analisis()
 
     def format_entry(entry):
         # replace space with '+' from regEx
