@@ -1,53 +1,58 @@
 from bs4 import BeautifulSoup
 import requests
 import re
-from analize import analisis, pass_dict, print_to_file
+from analize import analisis, print_to_file
 
 # this one gets user input and scrapes the website for job offers
 # then sends to the helper function the description to analize and store relevant data
 
-
 # define brower agent to show
-agent = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0'}
+agent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0'}
 
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 if __name__ == '__main__':
     def main():
-        res_dict = {}
 
+        # OPTIONAL (da indentare dopo) - causa crash
+        # for i in range(0, 60, 10):
+
+        # returns a list of dictionary for every job listing in the page
         job = transform(extract(0))
-        # with open('block_of_text.txt', 'w') as raw_text:
 
-        # per tab della pagina job
-        # apri la pagina ed analizza description
+
+        # for every element of the list open the job page and extract the description as lowercase text
         for j in job:
-            # print(j)
-            # print('\n')
-            description = (retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
-            # count_desc += 1
-            # print('\n')
-            # print('=======================================')
-            # print('\n')
-            # wrong
-            # raw_text.write(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
+            page_object = pull_listing_data('https://it.indeed.com' + j['job_link'])
+            try:
+                description = retreive_description(page_object)
+            except AttributeError:
+                print("Service on Indeed temporarily unavailable")
+            # for every job page, call analize to do string match
             analisis(description)
 
-        res_dict = pass_dict()
-        print_to_file(res_dict)
+        # after logging data to the dict, send command to print to file
+        # optional arguments (formatted=yes/no)
+        print_to_file()
+
+# end of main()
 
 
+
+    # formats user input to match url specifications
     def format_entry(entry):
-        # replace space with '+' from regEx
+        # replace space with '+' with regular expression
         formatted = re.sub(r"\s+", '+', entry)
         return formatted
 
+    # returns the HTML of the page
     def extract(page):
 
+        # TEMPORARY COMMENTED =========
+        # CHIAMARLO IN FUNZIONE MAIN SE NO LO CHIEDE AD OGNI LOOP
         # ask for user input and formats it
-        # TEMPORARY COMMENT
         # place = format_entry(input('Where to search? '))
         # job_search = format_entry(input('What to search for? '))
+        # TEMPORARY COMMENTED =========
 
         # REMOVE THIS AUTOMATION
         place = 'Besana+in+brianza'
@@ -62,18 +67,21 @@ if __name__ == '__main__':
         soup = BeautifulSoup(r.content, 'html.parser')
         return soup
 
+    # retrieves all the divs
     def transform(soup):
         jobList = []
         # all the card divs
         divs = soup.find_all('div', class_='job_seen_beacon')
 
         for item in divs:
+
+            # as of now only job_link is relevant, other elements can be integrated later for added functionalities
             # job title is in the <a> tag as text
             jobTitle = item.find('a').text.strip()
             companyName = item.find('span', class_='companyName').text.strip()
             description = item.find('div', class_='job-snippet').text.strip()
             location = item.find('div', class_='companyLocation').text.strip()
-            # link is in the <a> tag as the title but as an href attribute
+            # link is in the <a> tag as the title BUT as an href attribute
             job_link = item.find('a').get('href')
             # create a job dictionary
             job = {
@@ -90,7 +98,7 @@ if __name__ == '__main__':
 
         return jobList
 
-# extracts the DOM from every job link page
+    # extracts the DOM from every job link page
     def pull_listing_data(job_link):
 
         r = requests.get(job_link, agent)
@@ -98,7 +106,7 @@ if __name__ == '__main__':
 
         return jobSoup
 
-# returns the text for the job offer description
+    # returns the text for the job offer description
     def retreive_description(jobSoup):
 
         description = jobSoup.find('div', {'id': 'jobDescriptionText'}).text.strip()
