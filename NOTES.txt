@@ -1,5 +1,25 @@
 
+LIST OF ERRORS:
+1) If i leave "c++" as a value to search with regular expression, it throws an error <re.error: multiple repeat at position 4>, but if I change it to 'c+' it works just fine
 
+
+
+
+=====================================
+
+30/07
+Funziona, ho iniziato a pulire la formattazione e rimuovere le funzioni non piu utilizzate
+
+sistemato commenti, ed inizio a perfezionare integrazione tra le helper functions
+TODO:
+_ attivare user input per la ricerca
+_ mettere arguments per modificare il comportamento dell'esecuzione (esempio: print result as percents or as total number of matches)
+_ add arguments <dev_mode> for the program to:
+    - append all the raw text from every listing to the block_of_text.txt file (erase before initiating)
+    - add counter to the output file for ALL matches
+
+=====================================
+29/07
 Non sono riuscito al momento ad iterare ad ogni passaggio della pagina, devo modificare la helper function  di analize in modo che analize chiama soltanto la funzione di conteggio delle parole e log dentro al dictionary
 e poi dopo aver parsed tra tutte le pagine, chiamare a parte le due funzioni di modifica e riordino e POI print
 se no ogni ovlta riscriveva per ogni listing una nuova list o la appendeva sotto diventando inutile
