@@ -8,6 +8,10 @@ LIST OF ERRORS:
 =====================================
 
 30/07
+TODO
+- coontinuare a creare arguments.py per gestire i cli arguments
+
+log:
 Funziona, ho iniziato a pulire la formattazione e rimuovere le funzioni non piu utilizzate
 
 sistemato commenti, ed inizio a perfezionare integrazione tra le helper functions
