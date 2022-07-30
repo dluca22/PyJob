@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import re
-from analize import analisis
+from analize import analisis, pass_dict, print_to_file
 
 # this one gets user input and scrapes the website for job offers
 # then sends to the helper function the description to analize and store relevant data
@@ -14,20 +14,28 @@ agent = {
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 if __name__ == '__main__':
     def main():
+        res_dict = {}
 
         job = transform(extract(0))
-        with open('block_of_text.txt', 'w') as raw_text:
-            for j in job:
-                # print(j)
-                # print('\n')
-                # print(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
-                # count_desc += 1
-                # print('\n')
-                # print('=======================================')
-                # print('\n')
-                raw_text.write(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
+        # with open('block_of_text.txt', 'w') as raw_text:
 
-        analisis()
+        # per tab della pagina job
+        # apri la pagina ed analizza description
+        for j in job:
+            # print(j)
+            # print('\n')
+            description = (retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
+            # count_desc += 1
+            # print('\n')
+            # print('=======================================')
+            # print('\n')
+            # wrong
+            # raw_text.write(retreive_description(pull_listing_data('https://it.indeed.com' + j['job_link'])))
+            analisis(description)
+
+        res_dict = pass_dict()
+        print_to_file(res_dict)
+
 
     def format_entry(entry):
         # replace space with '+' from regEx
@@ -93,8 +101,7 @@ if __name__ == '__main__':
 # returns the text for the job offer description
     def retreive_description(jobSoup):
 
-        description = jobSoup.find(
-            'div', {'id': 'jobDescriptionText'}).text.strip()
+        description = jobSoup.find('div', {'id': 'jobDescriptionText'}).text.strip()
 
         return description.strip().lower()
         #  TODO call for analizing the text in the description
