@@ -11,6 +11,12 @@ SOLUZ: cercare tramite dom, di reperire "Pagina 2 di 39 annunci"
 
 
 =====================================
+31/07
+Continuare ad integrare CLI arguments
+capire perche la logica funziona in testing.py e non in lookfor.py, in quanto con 2 arguments da una risposta diversa a quello di testing.py
+
+inoltre con il numero di pagine non fa comquneu l'iterazione tra una e l'altra, ma ritorna i risultati della prima, manca qualche passsaggio di var o di loop
+=====================================
 
 30/07
 TODO

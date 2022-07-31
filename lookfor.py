@@ -15,30 +15,46 @@ agent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Geck
 if __name__ == '__main__':
     def main():
 
+        page = 0
+        usage_message = "Usage: $ python3 lookfor.py [pages 1-5, default=1] [dev_mode, default=OFF]"
         dev_mode = False
-        pages = 0
 
-        if len(sys.argv) > 3:
-            print("Invalid number of arguments")
-            help()
-        elif len(sys.argv) > 1:
+        # if 1 argum is help print help message
+        if len(sys.argv) == 2 and sys.argv[1].lower() == 'help':
+            sys.exit(usage_message)
+
+        # if 1 or 2 arguments passed
+        elif len(sys.argv) >= 2:
+            # if argv[1] is a number convert as page int
             try:
+                page = int(sys.argv[1])
+                # only accept 1-5
+                if page in range(1, 6):
+                    page = (page - 1) * 10
+                else:
+                    sys.exit("Error: can only accept numbers 1 to 5")
+            # if argv[1] not a number
+            except ValueError:
+                sys.exit(f"!!! ERROR !!! \n{usage_message}")
 
-            if 'dev_mode' in sys.argv:
+            # but if arguments are 2 and the second is 'dev_mode'
+            if len(sys.argv) == 3 and sys.argv[2] == 'dev_mode':
+                    # set developer mode as True
                 dev_mode = True
-            if range(1,6) in sys.argv:
-                pages
 
+            else:
+                sys.exit(f"!!! ERROR1231231 !!! \n{usage_message}")
+        # if more than 2 arguments
+        if len(sys.argv) > 3:
+            sys.exit(f"Invalid number of arguments!!!! \n{usage_message}")
 
-
-
-
-        # OPTIONAL (da indentare dopo) - causa crash
-        # for i in range(0, 60, 10):
 
         # returns a list of dictionary for every job listing in the page
-        job = transform(extract(0))
-
+        if page != 0:
+            for p in range(1, page):
+                job = transform(extract(p))
+        elif page == 0:
+            job = transform(extract(0))
 
         # for every element of the list open the job page and extract the description as lowercase text
         for j in job:
@@ -75,7 +91,8 @@ if __name__ == '__main__':
         # TEMPORARY COMMENTED =========
 
         # REMOVE THIS AUTOMATION
-        place = 'Besana+in+brianza'
+        # place = 'Besana+in+brianza'
+        place = 'Milano'
         job_search = 'developer+junior'
 
         # page 1 starts at 0, then increments of 10
