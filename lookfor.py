@@ -1,7 +1,9 @@
+from analize import analisis, print_to_file
+from arguments import help
 from bs4 import BeautifulSoup
 import requests
 import re
-from analize import analisis, print_to_file
+import sys
 
 # this one gets user input and scrapes the website for job offers
 # then sends to the helper function the description to analize and store relevant data
@@ -12,6 +14,24 @@ agent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Geck
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 if __name__ == '__main__':
     def main():
+
+        dev_mode = False
+        pages = 0
+
+        if len(sys.argv) > 3:
+            print("Invalid number of arguments")
+            help()
+        elif len(sys.argv) > 1:
+            try:
+
+            if 'dev_mode' in sys.argv:
+                dev_mode = True
+            if range(1,6) in sys.argv:
+                pages
+
+
+
+
 
         # OPTIONAL (da indentare dopo) - causa crash
         # for i in range(0, 60, 10):

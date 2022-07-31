@@ -2,6 +2,11 @@
 LIST OF ERRORS:
 1) If i leave "c++" as a value to search with regular expression, it throws an error <re.error: multiple repeat at position 4>, but if I change it to 'c+' it works just fine
 
+2) ho integrato la possibiltà di scegliere le pagine da guardare (limitato da 1 a 5) trasfromando il conteggio *10 secondo la logica di indeed
+    - se cerco pagina 5, inietta nell'url =40, ed è giusto, pero cercando le offerte su paesi piccoli,  a volte non arriva  a 5 pagine, quindi anche inserendo 40, in realtà guarda solo pagina 2
+SOLUZ: cercare tramite dom, di reperire "Pagina 2 di 39 annunci"
+    durante il loop di ricerca tra le pagine (forse era quello che mi mandava a male tutto) ed interrompere tutto
+
 
 
 

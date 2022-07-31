@@ -1,32 +1,29 @@
-import json
-import csv
-import re
+import sys
 
-dict = {}
-# saved raw input from github because no internet connection, so saved to a .txt file and continued offline
-def clean_text(str):
-    # conditions to be substituted from the text
-    replace_conditions = {"'": "", "[":"", "]":""}
-    # remove_quotes = str.replace("'", "").replace("\[")
-    for i, j in replace_conditions.items():
-        str = str.replace(i, j)
-    return str
-    # cleaned = re.sub(!, str)
+dev_mode = False
+number_of_pages = ['1','2','3','4','5']
+page = ''
 
-    # return cleaned
+if len(sys.argv) > 3:
+    print("Invalid number of arguments")
+    sys.exit("linea 9")
+
+elif len(sys.argv) >= 2:
+    try:
+        page = int(sys.argv[1])
+        if page in range(1, 6):
+            page = (page - 1) * 10
+        else:
+            sys.exit("Error: can only accept numbers 1 to 5")
+    except ValueError:
+        sys.exit("!!! ERROR !!! \nUsage: python3 lookfor.py [pages 1-5, default=1][dev_mode, default=OFF]")
+
+if len(sys.argv) == 3:
+    if sys.argv[2] == 'dev_mode':
+        dev_mode = True
+        print(dev_mode)
+    else:
+        sys.exit("!!! ERROR !!! \nUsage: python3 lookfor.py [pages 1-5, default=1][dev_mode, default=OFF]")
 
 
-
-with open('raw_list_from_github.txt', 'r') as raw:
-    #reads as a string, removing quotes from each str
-    reader = raw.read()
-    cleaned = clean_text(reader).lower()
-    # # transforms the str obj to a list separated at the ","
-    list = list(cleaned.split(","))
-
-    # # loop the list and gives def value of 0
-    for i in list:
-        dict[i] = 0
-    with open('values_dict.txt', 'w'):
-
-        print(dict)
+print(page)
