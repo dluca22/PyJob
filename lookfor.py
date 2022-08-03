@@ -18,6 +18,7 @@ if __name__ == '__main__':
         page = 0
         usage_message = "Usage: $ python3 lookfor.py [pages 1-5, default=1] [dev_mode, default=OFF]"
         dev_mode = False
+        jobList = []
 
         # if 1 argum is help print help message
         if len(sys.argv) == 2 and sys.argv[1].lower() == 'help':
@@ -25,6 +26,10 @@ if __name__ == '__main__':
 
         # if 1 or 2 arguments passed
         elif len(sys.argv) >= 2:
+
+            if len(sys.argv) == 3 and sys.argv[2] == 'dev_mode':
+                    # set developer mode as True
+                dev_mode = True
             # if argv[1] is a number convert as page int
             try:
                 page = int(sys.argv[1])
@@ -35,34 +40,38 @@ if __name__ == '__main__':
                     sys.exit("Error: can only accept numbers 1 to 5")
             # if argv[1] not a number
             except ValueError:
-                sys.exit(f"!!! ERROR !!! \n{usage_message}")
+                sys.exit(f"!!! ERROR - not a number!!! \n{usage_message}")
 
             # but if arguments are 2 and the second is 'dev_mode'
-            if len(sys.argv) == 3 and sys.argv[2] == 'dev_mode':
-                    # set developer mode as True
-                dev_mode = True
 
-            else:
-                sys.exit(f"!!! ERROR1231231 !!! \n{usage_message}")
         # if more than 2 arguments
         if len(sys.argv) > 3:
             sys.exit(f"Invalid number of arguments!!!! \n{usage_message}")
 
 
         # returns a list of dictionary for every job listing in the page
-        if page != 0:
-            for p in range(1, page):
-                job = transform(extract(p))
-        elif page == 0:
-            job = transform(extract(0))
+        if page == 0:
+            jobList = transform(extract(0))
+            print(jobList)
+            print(len(jobList))
+            sys.exit("1")
+        elif page != 0:
+            # in range da page 0 a page +1(8)inclusive page) step 10
+            for p in range(0, page +1, 10):
+                
+                jobList.extend(transform(extract(p)))
+            print(jobList)
+            print(len(jobList))
+            sys.exit("2+")
+
 
         # for every element of the list open the job page and extract the description as lowercase text
-        for j in job:
+        for j in jobList:
             page_object = pull_listing_data('https://it.indeed.com' + j['job_link'])
             try:
                 description = retreive_description(page_object)
             except AttributeError:
-                print("Service on Indeed temporarily unavailable")
+                sys.exit("Service on Indeed temporarily unavailable")
             # for every job page, call analize to do string match
             analisis(description)
 
