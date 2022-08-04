@@ -8,6 +8,15 @@ SOLUZ: cercare tramite dom, di reperire "Pagina 2 di 39 annunci"
     durante il loop di ricerca tra le pagine (forse era quello che mi mandava a male tutto) ed interrompere tutto
 
 3) sistemare line 54 dove, per ora funziona ma la logica non è la migliore, funziona ma è poco leggibile, si aziona se "page" viene definito divefso da zero basato sull'argument, se no va in default su 0
+
+4) sistemare meglio il dictionary delle keyword da ricercare per non avere valori inutili
+5) aggiungere diversi dictionaries con altre keywords riguardanti altre professsioni/ambiti lavorativi/skills
+=====================================
+04/08
+sistemato e messo in funzione il conteggio dei match e print ad output
+dopo aver sistemato iteratore di pagina, ho modificato temporanemamente print_to_file per i total matches
+ora funziona restituendo un numero credibile di matches ed i calcoli funzionano bene
+
 =====================================
 03/08
 sistemato ieratore delle pagine che fa eseguire il comando di ricerca in loop da passare a url
