@@ -50,19 +50,15 @@ if __name__ == '__main__':
 
 
         # returns a list of dictionary for every job listing in the page
+        #if no param, just look at page 0
         if page == 0:
             jobList = transform(extract(0))
-            print(jobList)
-            print(len(jobList))
-            sys.exit("1")
+            #if page argument given >1 , loop over and .extend the jobList adding all job dictionaries
         elif page != 0:
             # in range da page 0 a page +1(8)inclusive page) step 10
             for p in range(0, page +1, 10):
                 
                 jobList.extend(transform(extract(p)))
-            print(jobList)
-            print(len(jobList))
-            sys.exit("2+")
 
 
         # for every element of the list open the job page and extract the description as lowercase text

@@ -46,13 +46,16 @@ def print_to_file():
     with open('results.txt', 'w') as output:
         elaborated = percent_calc(sort_dictionary(res_dict))
 
-        output.write(f'Skill = Nr. of matches (% of relevance) \n \n')
-        # for every k, v of the dict > write a line to the output file
+        # pretty format header of the output file
+        output.write(f'Skill = Nr. of matches (% of relevance) \n ')
+
+        # temporaneo, voglio solo attivarlo quando viene attivata la modalita dev_mode
+        # if function argument=True:
+        output.write(f'\n Total matches: {counter} \n \n')
+
+        # for every key and value of the dict > write a line to the output file
         for k, v in elaborated.items():
                 output.write(f"{k.capitalize()} =   {res_dict[k]} ({v} %)\n")
-
-        # if function argument=True:
-        output.write(f'\n Total matches: {counter}')
 
 # ===========================================================
 
