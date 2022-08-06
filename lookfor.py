@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import sys
+import time
 
 # this one gets user input and scrapes the website for job offers
 # then sends to the helper function the description to analize and store relevant data
@@ -14,6 +15,7 @@ agent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Geck
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 if __name__ == '__main__':
     def main():
+        start_time = time.time()
 
         page = 0
         usage_message = "Usage: $ python3 lookfor.py [pages 1-5, default=1] [dev_mode, default=OFF]"
@@ -57,7 +59,7 @@ if __name__ == '__main__':
         elif page != 0:
             # in range da page 0 a page +1(8)inclusive page) step 10
             for p in range(0, page +1, 10):
-                
+
                 jobList.extend(transform(extract(p)))
 
 
@@ -73,8 +75,14 @@ if __name__ == '__main__':
 
         # after logging data to the dict, send command to print to file
         # optional arguments (formatted=yes/no)
-        print_to_file()
 
+
+        if dev_mode == True:
+            timing = time.time() - start_time
+            print_to_file(dev_mode, timing)
+        else:
+            #if no dev_mode, function has default parameters
+            print_to_file()
 # end of main()
 
 
@@ -98,7 +106,7 @@ if __name__ == '__main__':
         # REMOVE THIS AUTOMATION
         # place = 'Besana+in+brianza'
         place = 'Milano'
-        job_search = 'developer+junior'
+        job_search = 'pentester'
 
         # page 1 starts at 0, then increments of 10
         # ad user input variables for job Position & area as func param

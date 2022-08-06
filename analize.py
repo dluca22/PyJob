@@ -41,17 +41,17 @@ def sort_dictionary(unsorted_dict):
 
 # ===========================================================
 
-def print_to_file():
+def print_to_file(dev_mode=False, timing=0):
     # calls the 2 functions that order and transform the dict to a more readable format
     with open('results.txt', 'w') as output:
         elaborated = percent_calc(sort_dictionary(res_dict))
 
         # pretty format header of the output file
-        output.write(f'Skill = Nr. of matches (% of relevance) \n ')
+        output.write(f'Skill = Nr. of matches (% of relevance) \n \n')
 
-        # temporaneo, voglio solo attivarlo quando viene attivata la modalita dev_mode
-        # if function argument=True:
-        output.write(f'\n Total matches: {counter} \n \n')
+        # in dev_mode print matches and time taken (add num of pages and maybe links to every job offer)
+        if dev_mode ==True:
+            output.write(f'< Total matches: {counter}, Time: {round(timing, 2)}s > \n \n')
 
         # for every key and value of the dict > write a line to the output file
         for k, v in elaborated.items():
