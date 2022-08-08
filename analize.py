@@ -2,6 +2,7 @@ import re
 from dictionary import languages
 
 
+
 # gets data from main program and analize the text
 # outputs data to a file
 
@@ -41,7 +42,7 @@ def sort_dictionary(unsorted_dict):
 
 # ===========================================================
 
-def print_to_file(dev_mode=False, timing=0):
+def print_to_file(dev_mode=False, timing=0, ids=None, jobList=None):
     # calls the 2 functions that order and transform the dict to a more readable format
     with open('results.txt', 'w') as output:
         elaborated = percent_calc(sort_dictionary(res_dict))
@@ -50,13 +51,20 @@ def print_to_file(dev_mode=False, timing=0):
         output.write(f'Skill = Nr. of matches (% of relevance) \n \n')
 
         # in dev_mode print matches and time taken (add num of pages and maybe links to every job offer)
+        # writes the counter of ALL matches, the total of unique offers searched (set of ids)
         if dev_mode ==True:
-            output.write(f'< Total matches: {counter}, Time: {round(timing, 2)}s > \n \n')
+            output.write(f'< Total matches: {counter} in {len(ids)} unique offers, Time: {round(timing, 2)}s > \n')
+            output.write('Total matches does not limit to the count to just 1 per offer, but EVERY match) \n \n')
 
         # for every key and value of the dict > write a line to the output file
         for k, v in elaborated.items():
                 output.write(f"{k.capitalize()} =   {res_dict[k]} ({v} %)\n")
 
+        # if dev_mode == True:
+        #     for items in jobList:
+        #         # print('eee', items)
+        #         if items['id'] in ids:
+        #             print('ooo', items['id'])
 # ===========================================================
 
 def analisis(text):
@@ -70,7 +78,7 @@ def analisis(text):
         matches = re.findall(rf'\b{key}\b', text)
         # if it matches creates a list with all occurences
         if len(matches) >= 1:
-            # just counts EVERY matches found
+            # just counts EVERY matches found for dev_mode
             counter = counter + len(matches)
             # just add 1 to the dict
             languages[key] += 1

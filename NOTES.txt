@@ -12,6 +12,9 @@ SOLUZ: cercare tramite dom, di reperire "Pagina 2 di 39 annunci"
 4) sistemare meglio il dictionary delle keyword da ricercare per non avere valori inutili
 5) aggiungere diversi dictionaries con altre keywords riguardanti altre professsioni/ambiti lavorativi/skills
 =====================================
+06/08
+Aggiunto timing to dev_mode , ma devo Sistemare "ERRORS 2" perche se scelgo una professione con poche offerte o una zona con pochi annunci, le offerte vengono Ri conteggiate le stesse, inquinando i risultati
+=====================================
 04/08
 sistemato e messo in funzione il conteggio dei match e print ad output
 dopo aver sistemato iteratore di pagina, ho modificato temporanemamente print_to_file per i total matches

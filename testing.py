@@ -1,42 +1,45 @@
+from analize import analisis, print_to_file
+from arguments import help
+from bs4 import BeautifulSoup
+import requests
+import re
 import sys
+import time
 
-dev_mode = False
-page = 0
-usage_message = "Usage: $ python3 lookfor.py [pages 1-5, default=1] [dev_mode, default=OFF]"
+agent = {'User-Agent' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'}
 
-# for i in (sys.argv):
-#     print(i)
-# print(len(sys.argv))
+def extract(page):
+        place = 'Milano'
+        job_search = 'junior+developer'
 
+        url = f'https://it.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
+        print(url)
 
-# if 1 argum is help print help message
-if len(sys.argv) == 2 and sys.argv[1].lower() == 'help':
-    sys.exit(f"!!! ERROR !!! \n{usage_message}")
+        r = requests.get(url, agent)
+        # print("r is ", type(r))
+        # returns the DOM object
+        soup = BeautifulSoup(r.content, 'html.parser')
+        # print("soup is ", type(soup))
+        time.sleep(3)
+        divs = soup.find_all('div', class_='jobsearch-JobCountAndSortPane-jobCount')
+        print("len of divs", len(divs))
+        print(divs)
 
-# if 1 or 2 arguments passed
-elif len(sys.argv) >= 2:
-    # if argv[1] is a number convert as page int
-    try:
-        page = int(sys.argv[1])
-        # only accept 1-5
-        if page in range(1, 6):
-            page = (page - 1) * 10
-        else:
-            sys.exit("Error: can only accept numbers 1 to 5")
-    # if argv[1] not a number
-    except ValueError:
-        sys.exit(f"!!! ERROR !!! \n{usage_message}")
+        # with open('test.txt', 'w') as test:
+        #     for div in divs:
+        #         test.write(div)
+        # #         div.find('div', class_="jobsearch-LeftPane")
+        # #         # print(div.text)
+        # # #     total_listings = soup.find_all('div', class_='jobsearch-JobCountAndSortPane-jobCount')
+        # #         # test.write(div.text)
 
-    # but if arguments are 2 and the second is 'dev_mode'
-    if len(sys.argv) == 3 and sys.argv[2] == 'dev_mode':
-                    # set developer mode as True
-                dev_mode = True
-    else:
-        sys.exit(f"!!! ERROR !!! \n{usage_message}")
-# if more than 2 arguments
-if len(sys.argv) > 3:
-    sys.exit(f"Invalid number of arguments!!!! \n{usage_message}")
+        sys.exit("mio exit")
+        # # sys.exit(f'this {len(total_listings)}')
+
+        return soup
+
+def main():
+    extract(0)
 
 
-print(page)
-print(dev_mode)
+main()
