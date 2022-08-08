@@ -1,3 +1,4 @@
+from glob import glob
 from xmlrpc.client import Boolean
 from analize import analisis, print_to_file
 from arguments import help
@@ -14,6 +15,8 @@ import time
 agent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0'}
 
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
+
+# ===========================================================
 if __name__ == '__main__':
     def main():
 
@@ -21,7 +24,6 @@ if __name__ == '__main__':
         page = 0
         usage_message = "Usage: $ python3 lookfor.py [pages 1-5, default=1] [dev_mode, default=OFF]"
         dev_mode : Boolean = False # False DEFAULT VAL
-        jobList = []
         searched_ids = set()
 
         # if 1 argum is "help" print help message
@@ -58,24 +60,14 @@ if __name__ == '__main__':
         if len(sys.argv) > 3:
             sys.exit(f"Invalid number of arguments!!!! \n{usage_message}")
 
+        # ask for user input and formats it
+        place = format_entry(input('Where to search? '))
+        job_search = format_entry(input('What to search for? '))
 
-        # returns a list of dictionary for every job listing in the page
-        #if no param, just look at page 0
-        if page == 0:
-            jobList = transform(extract(0))
-            #if page argument given >1 , loop over and .extend the jobList adding all job dictionaries
-        elif page != 0:
-            # in range da page 0 a page +1(8)inclusive page) step 10
-            for p in range(0, page +1, 10):
-                jobList.extend(transform(extract(p)))
-
-
-
-            # sys.exit(jobList)
+        # creates a lists from function
+        jobList = extract_from_page(page, place, job_search)
 
         # for every element of the list open the job page and extract the description as lowercase text
-
-        # for every element in the hob list
         for j in jobList:
             # if the job 'id' is not in the set of already searched
             if j['id'] not in searched_ids:
@@ -84,14 +76,13 @@ if __name__ == '__main__':
                 # pull the listing for the offer
                 page_object = pull_listing_data('https://it.indeed.com' + j['job_link'])
                 try:
-                    description = retreive_description(page_object)
+                    description = get_description(page_object)
                 except AttributeError:
-                    print(retreive_description(page_object))
+                    print(get_description(page_object))
                     sys.exit("Service on Indeed temporarily unavailable")
                 # for every job page that has not yet been analized
                 #  call analisis to do string match
                 analisis(description)
-
 
         # dev_mode trigger
         if dev_mode == True:
@@ -99,63 +90,52 @@ if __name__ == '__main__':
             print_to_file(dev_mode, timing, searched_ids, jobList)
         else:
             #if no dev_mode, function has default parameters
-            print_to_file()
+            print_to_file(ids=searched_ids)
 
 # end of main()
-
-
+# ===========================================================
 
     # formats user input to match url specifications
     def format_entry(entry):
         # replace space with '+' with regular expression
-        formatted = re.sub(r"\s+", '+', entry)
+        # strip trailing whitespaces
+        formatted = re.sub(r"\s+", '+', entry.strip())
+        
         return formatted
+# ===========================================================
+    def extract_from_page(page, place, job_search):
+        # empty job list to be filled with dicts
+        jobList = []
+        if page == 0:
+            jobList = transform(extract(0, place, job_search))
+                #if page argument given >1 , loop over and .extend the jobList adding all job dictionaries
+        elif page != 0:
+            # in range da page 0 a page +1(8)inclusive page) step 10
+            for p in range(0, page +1, 10):
+                jobList.extend(transform(extract(p, place, job_search)))
+        return jobList
+# ===========================================================
 
     # returns the HTML of the page
-    def extract(page):
-
-        # TEMPORARY COMMENTED =========
-        # CHIAMARLO IN FUNZIONE MAIN SE NO LO CHIEDE AD OGNI LOOP
-        # ask for user input and formats it
-        # place = format_entry(input('Where to search? '))
-        # job_search = format_entry(input('What to search for? '))
-        # TEMPORARY COMMENTED =========
-
-        # REMOVE THIS AUTOMATION
-        # place = 'Besana+in+brianza'
-        place = 'Milano'
-        job_search = 'junior+developer'
+    def extract(page, place, job_search):
 
         # page 1 starts at 0, then increments of 10
-        # ad user input variables for job Position & area as func param
-        # removed region field
         url = f'https://it.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
+        # url_usa = f'https://www.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
+
         r = requests.get(url, agent)
         # returns the DOM object
         soup = BeautifulSoup(r.content, 'html.parser')
 
-
         return soup
 
-    def limit_page(soup):
-        with open('test.txt', 'w') as test:
-            for items in divs:
-                test.write('\n ======================== \n')
-                test.write(items.text)
-                test.write('\n ======================== \n')
-                sys.exit()
-            test.write('\n ------------------ \n')
-            # test.write(soup.text)
+# ===========================================================
 
-
-
-    # retrieves all the divs
+    # gets all the divs
     def transform(soup):
         jobList = []
         # all the card divs
         divs = soup.find_all('div', class_='job_seen_beacon')
-
-
 
         for item in divs:
 
@@ -173,10 +153,8 @@ if __name__ == '__main__':
                 'id' : id,
                 'title': jobTitle,
                 'company': companyName,
-                # rarely defined but also field is shared with contract duration
-                # 'salary' : salary,
-                'location': location,
-                'short_description': snippet,
+                # 'location': location,
+                # 'short_description': snippet,
                 'job_link': job_link
             }
             # every loop appends a dictionary to the list
@@ -184,6 +162,7 @@ if __name__ == '__main__':
 
         return jobList
 
+# ===========================================================
     # extracts the DOM from every job link page
     def pull_listing_data(job_link):
 
@@ -192,13 +171,13 @@ if __name__ == '__main__':
 
         return jobSoup
 
+# ===========================================================
     # returns the text for the job offer description
-    def retreive_description(jobSoup):
+    def get_description(jobSoup):
 
         description = jobSoup.find('div', {'id': 'jobDescriptionText'}).text.strip()
 
         return description.strip().lower()
-        #  TODO call for analizing the text in the description
 
 
 main()

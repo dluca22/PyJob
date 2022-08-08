@@ -1,3 +1,9 @@
+TODOS
+1) add unit testing
+2) add branch to build a web app with flask
+3) add indeed USA integration + argv logic
+4) make a better dictionary of keywords or a txt file list
+
 
 LIST OF ERRORS:
 1) If i leave "c++" as a value to search with regular expression, it throws an error <re.error: multiple repeat at position 4>, but if I change it to 'c+' it works just fine

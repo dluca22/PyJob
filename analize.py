@@ -1,5 +1,6 @@
 import re
 from dictionary import languages
+import sys
 
 
 
@@ -9,7 +10,7 @@ from dictionary import languages
 # this is an helper function, so it works independently from the source of the data (in this case indeed, but later should manage the same text from other websites/listing)
 
 # second dictionary with only non zero values
-res_dict = {}
+result_dict = {}
 counter = 0
 
 # ===========================================================
@@ -21,7 +22,6 @@ def percent_calc(dictionary):
         # updates dict with same Key but a Value x 100 divided by total of sum of dict values
         dictionary.update({k : float("{:.2f}".format(v *100 / total ))})
         # only add percent sign to the file writing so it is still a computable number for later use
-
     return dictionary
 
 # ===========================================================
@@ -45,20 +45,22 @@ def sort_dictionary(unsorted_dict):
 def print_to_file(dev_mode=False, timing=0, ids=None, jobList=None):
     # calls the 2 functions that order and transform the dict to a more readable format
     with open('results.txt', 'w') as output:
-        elaborated = percent_calc(sort_dictionary(res_dict))
+        elaborated = percent_calc(sort_dictionary(result_dict))
 
         # pretty format header of the output file
-        output.write(f'Skill = Nr. of matches (% of relevance) \n \n')
-        
+        output.write(f'Skill = Nr. of matches (% of relevance) \n')
+        output.write(f'Total keywords matching: {counter} in {len(ids)} unique offers \n \n')
+
         # in dev_mode print matches and time taken (add num of pages and maybe links to every job offer)
         # writes the counter of ALL matches, the total of unique offers searched (set of ids)
         if dev_mode ==True:
-            output.write(f'< Total keywords matching: {counter} in {len(ids)} unique offers, Time: {round(timing, 2)}s > \n')
-            output.write('Total matches does not limit to the count to just 1 per offer, but EVERY match) \n \n')
+            output.write(f'<Time: {round(timing, 2)}s > \n')
+            output.write('other useless things for dev_mode) \n \n')
 
         # for every key and value of the dict > write a line to the output file
         for k, v in elaborated.items():
-                output.write(f"{k.capitalize()} =   {res_dict[k]} ({v} %)\n")
+                output.write(f"{k.capitalize()} =   {result_dict[k]} ({v} %)\n")
+
 
 # print to file every checked job title and job link (but it's kinda useless for what i need)
         # if dev_mode == True:
@@ -68,7 +70,7 @@ def print_to_file(dev_mode=False, timing=0, ids=None, jobList=None):
 # ===========================================================
 
 def analisis(text):
-    global res_dict, counter
+    global result_dict, counter
 
     # matches = list that gets populated by every occurence of the key of the dictionary
     matches = []
@@ -92,9 +94,9 @@ def analisis(text):
         for k, v in languages.items():
             if v != 0:
                 # if key is already present, adds the value
-                if  k in res_dict:
-                    res_dict[k] += v
+                if  k in result_dict:
+                    result_dict[k] += v
                 # else creates a new k:v pair
-                res_dict.update({k : v})
+                result_dict.update({k : v})
 
             # fine analize()
