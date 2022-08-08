@@ -49,22 +49,22 @@ def print_to_file(dev_mode=False, timing=0, ids=None, jobList=None):
 
         # pretty format header of the output file
         output.write(f'Skill = Nr. of matches (% of relevance) \n \n')
-
+        
         # in dev_mode print matches and time taken (add num of pages and maybe links to every job offer)
         # writes the counter of ALL matches, the total of unique offers searched (set of ids)
         if dev_mode ==True:
-            output.write(f'< Total matches: {counter} in {len(ids)} unique offers, Time: {round(timing, 2)}s > \n')
+            output.write(f'< Total keywords matching: {counter} in {len(ids)} unique offers, Time: {round(timing, 2)}s > \n')
             output.write('Total matches does not limit to the count to just 1 per offer, but EVERY match) \n \n')
 
         # for every key and value of the dict > write a line to the output file
         for k, v in elaborated.items():
                 output.write(f"{k.capitalize()} =   {res_dict[k]} ({v} %)\n")
 
+# print to file every checked job title and job link (but it's kinda useless for what i need)
         # if dev_mode == True:
-        #     for items in jobList:
-        #         # print('eee', items)
-        #         if items['id'] in ids:
-        #             print('ooo', items['id'])
+        #     for job in jobList:
+        #         if job['id'] in ids:
+        #             output.write(f"{job['title']}, ==> {job['job_link']} \n ")
 # ===========================================================
 
 def analisis(text):

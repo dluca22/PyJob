@@ -1,3 +1,4 @@
+from xmlrpc.client import Boolean
 from analize import analisis, print_to_file
 from arguments import help
 from bs4 import BeautifulSoup
@@ -19,29 +20,34 @@ if __name__ == '__main__':
         start_time = time.time()
         page = 0
         usage_message = "Usage: $ python3 lookfor.py [pages 1-5, default=1] [dev_mode, default=OFF]"
-        dev_mode = True # False DEFAULT VAL
+        dev_mode : Boolean = False # False DEFAULT VAL
         jobList = []
         searched_ids = set()
 
-
         # if 1 argum is "help" print help message
-        if len(sys.argv) == 2 and sys.argv[1].lower() == 'help':
-            sys.exit(usage_message)
+        if len(sys.argv) == 2 and sys.argv[1].lower() in ('help', '--help'):
+            sys.exit(help())
 
         # if 1 or 2 arguments passed
         elif len(sys.argv) >= 2:
-
             if len(sys.argv) == 3 and sys.argv[2] == 'dev_mode':
                     # set developer mode as True
                 dev_mode = True
             # if argv[1] is a number convert as page int
             try:
                 page = int(sys.argv[1])
+                # if dev_mode active, list up to 15 pages
+                if dev_mode == True:
+                    if page in range(1, 16):
+                        page = (page - 1) * 10
+                    else:
+                        sys.exit("Error: Dev_mode only accept numbers 1 to 15")
                 # only accept 1-5
-                if page in range(1, 11):
-                    page = (page - 1) * 10
-                else:
-                    sys.exit("Error: can only accept numbers 1 to 5")
+                else: #if dev_mode is off
+                    if page in range(1, 6):
+                        page = (page - 1) * 10
+                    else:
+                        sys.exit("Error: can only accept numbers 1 to 5")
             # if argv[1] not a number
             except ValueError:
                 sys.exit(f"!!! ERROR - not a number!!! \n{usage_message}")
