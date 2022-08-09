@@ -1,7 +1,4 @@
-from glob import glob
-from xmlrpc.client import Boolean
-from analize import analisis, print_to_file
-from arguments import help
+from analize import analisis, print_to_file, pie_chart
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -22,43 +19,13 @@ if __name__ == '__main__':
 
         start_time = time.time()
         page = 0
-        usage_message = "Usage: $ python3 lookfor.py [pages 1-5, default=1] [dev_mode, default=OFF]"
-        dev_mode : Boolean = False # False DEFAULT VAL
+        dev_mode = False # False DEFAULT VAL
         searched_ids = set()
+        chart = False
 
-        # if 1 argum is "help" print help message
-        if len(sys.argv) == 2 and sys.argv[1].lower() in ('help', '--help'):
-            sys.exit(help())
+        if len(sys.argv) > 1:
+            page, dev_mode, chart= argv_commands(sys.argv)
 
-        # if 1 or 2 arguments passed
-        elif len(sys.argv) >= 2:
-            if len(sys.argv) == 3 and sys.argv[2] == 'dev_mode':
-                    # set developer mode as True
-                dev_mode = True
-            # if argv[1] is a number convert as page int
-            try:
-                page = int(sys.argv[1])
-                # if dev_mode active, list up to 15 pages
-                if dev_mode == True:
-                    if page in range(1, 16):
-                        page = (page - 1) * 10
-                    else:
-                        sys.exit("Error: Dev_mode only accept numbers 1 to 15")
-                # only accept 1-5
-                else: #if dev_mode is off
-                    if page in range(1, 6):
-                        page = (page - 1) * 10
-                    else:
-                        sys.exit("Error: can only accept numbers 1 to 5")
-            # if argv[1] not a number
-            except ValueError:
-                sys.exit(f"!!! ERROR - not a number!!! \n{usage_message}")
-
-            # but if arguments are 2 and the second is 'dev_mode'
-
-        # if more than 2 arguments
-        if len(sys.argv) > 3:
-            sys.exit(f"Invalid number of arguments!!!! \n{usage_message}")
 
         # ask for user input and formats it
         place = format_entry(input('Where to search? '))
@@ -78,7 +45,6 @@ if __name__ == '__main__':
                 try:
                     description = get_description(page_object)
                 except AttributeError:
-                    print(get_description(page_object))
                     sys.exit("Service on Indeed temporarily unavailable")
                 # for every job page that has not yet been analized
                 #  call analisis to do string match
@@ -87,12 +53,55 @@ if __name__ == '__main__':
         # dev_mode trigger
         if dev_mode == True:
             timing = time.time() - start_time
-            print_to_file(dev_mode, timing, searched_ids, jobList)
+            print_to_file(dev_mode, timing, searched_ids, jobList, url, job_search, place)
+        elif chart == True:
+            pie_chart()
         else:
             #if no dev_mode, function has default parameters
             print_to_file(ids=searched_ids)
 
 # end of main()
+# ===========================================================
+    def argv_commands(args, dev_mode=False, chart=False):
+        usage_message = "Usage: $ python3 lookfor.py [pages 1-5, default=1] [dev_mode, default=OFF]"
+
+        # if 1 argum is "help" print help message
+        if len(args) == 2 and args[1].lower() in ('help', '--help'):
+            sys.exit(help())
+
+        # if more than 2 arguments
+        elif len(args) > 3:
+            sys.exit(f"Invalid number of arguments!!!! \n{usage_message}")
+        # if 1 or 2 arguments passed
+
+        elif len(args) >= 2:
+            # but if arguments are 2 and the second is 'dev_mode'
+            if len(args) == 3 and args[2].lower() in ('-g', '-c', '--graph', '--chart'):
+                chart = True
+            if len(args) == 3 and args[2] == 'dev_mode':
+                    # set developer mode as True
+                dev_mode = True
+            # if argv[1] is a number convert as page int
+            try:
+                page = int(args[1])
+                # if dev_mode active, list up to 15 pages
+                if dev_mode == True:
+                    if page in range(1, 16):
+                        page = (page - 1) * 10
+                    else:
+                        sys.exit("Error: Dev_mode only accept numbers 1 to 15")
+                # only accept 1-5
+                else: #if dev_mode is off
+                    if page in range(1, 6):
+                        page = (page - 1) * 10
+                    else:
+                        sys.exit("Error: can only accept numbers 1 to 5")
+            # if argv[1] not a number
+            except ValueError:
+                sys.exit(f"!!! ERROR - not a number!!! \n{usage_message}")
+
+        return page, dev_mode, chart
+
 # ===========================================================
 
     # formats user input to match url specifications
@@ -100,7 +109,7 @@ if __name__ == '__main__':
         # replace space with '+' with regular expression
         # strip trailing whitespaces
         formatted = re.sub(r"\s+", '+', entry.strip())
-        
+
         return formatted
 # ===========================================================
     def extract_from_page(page, place, job_search):
@@ -118,7 +127,7 @@ if __name__ == '__main__':
 
     # returns the HTML of the page
     def extract(page, place, job_search):
-
+        global url
         # page 1 starts at 0, then increments of 10
         url = f'https://it.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
         # url_usa = f'https://www.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
@@ -179,5 +188,10 @@ if __name__ == '__main__':
 
         return description.strip().lower()
 
+# ===========================================================
+
+    def help():
+        print("usage: python3 lookfor.py [number of pages, default=1][dev_mode, default=OFF]")
+        print("dev_mode logs number of matches, number of offers searched and expands the limit to 15 pages")
 
 main()
