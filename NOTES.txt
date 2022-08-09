@@ -13,6 +13,11 @@ LIST OF ERRORS:
 4) sistemare meglio il dictionary delle keyword da ricercare per non avere valori inutili
 5) aggiungere diversi dictionaries con altre keywords riguardanti altre professsioni/ambiti lavorativi/skills
 
+09/08
+- aggiunto branch 'web_app'
+
+- sistemato vari input, modificato comportamento di dev_mode, aggiunto funzione per creare graph con maptplotlib
+===============
 08/08
 - Aggiunto user input a main, in modo che passi il valore ad extract(page)
 - Aggiunto un set in cui viene aggiunta l'id di ogni job che viene analizzato, ma se id è gia presente in set(), allora viene saltato, questo evita che si accumulino valori falsi per job ripetuti piu volte, in quanto su indeed se si forza ad andare su un altra pagina oltre all'ultima, vengono ripetuti gli stessi annunci e quindi verrebbero ri-analizzati dando falsi risultati
