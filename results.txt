@@ -1,15 +1,12 @@
 Skill = Nr. of matches (% of relevance) 
-Total keywords matching: 40 in 2 unique offers 
+Total keywords matching: 0 in 0 unique offers 
  
-Framework =   2 (10.0 %)
-C =   2 (10.0 %)
-C+ =   2 (10.0 %)
-Gnu =   2 (10.0 %)
-Python =   2 (10.0 %)
-Ruby =   2 (10.0 %)
-Linux =   2 (10.0 %)
-Server =   2 (10.0 %)
-Go =   1 (5.0 %)
-Hacking =   1 (5.0 %)
-Bash =   1 (5.0 %)
-Powershell =   1 (5.0 %)
+<Time: 3.49s > 
+(other useless things for dev_mode) 
+ 
+
+ 
+ URL = https://it.indeed.com/jobs?q=pentester&l=milano&start=0&vjk=ab0f880e61368268 
+Place = milano 
+Job = pentester 
+ 
