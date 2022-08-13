@@ -9,7 +9,7 @@ import time
 # then sends to the helper function the description to analize and store relevant data
 
 # define brower agent to show
-agent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0'}
+# agent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0'}
 
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 
@@ -127,12 +127,14 @@ if __name__ == '__main__':
 
     # returns the HTML of the page
     def extract(page, place, job_search):
-        global url
+        # global url
+        headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
         # page 1 starts at 0, then increments of 10
         url = f'https://it.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
         # url_usa = f'https://www.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
 
-        r = requests.get(url, agent)
+        r = requests.get(url, headers=headers)
+
         # returns the DOM object
         soup = BeautifulSoup(r.content, 'html.parser')
 
