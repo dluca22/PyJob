@@ -1,64 +1,57 @@
 Skill = Nr. of matches (% of relevance) 
-Total keywords matching: 588 in 66 unique offers 
+Total keywords matching: 335 in 40 unique offers 
  
-<Time: 62.3s > 
+<Time: 71.71s > 
 (other useless things for dev_mode) 
  
-Laurea =   34 (7.23 %)
-Java =   33 (7.02 %)
-Javascript =   33 (7.02 %)
-Sql =   24 (5.11 %)
-Framework =   21 (4.47 %)
-Git =   20 (4.26 %)
-Html5 =   19 (4.04 %)
-React =   17 (3.62 %)
-Database =   16 (3.4 %)
-Css3 =   15 (3.19 %)
-Angular =   15 (3.19 %)
-Html =   14 (2.98 %)
-C =   14 (2.98 %)
-C+ =   14 (2.98 %)
-Cloud =   14 (2.98 %)
-Css =   14 (2.98 %)
-Php =   11 (2.34 %)
-Python =   11 (2.34 %)
-.js =   10 (2.13 %)
-Full stack =   9 (1.91 %)
-Server =   9 (1.91 %)
-Front-end =   8 (1.7 %)
-Api =   7 (1.49 %)
-Docker =   7 (1.49 %)
-Vue =   6 (1.28 %)
-Linux =   6 (1.28 %)
-Microsoft =   6 (1.28 %)
-Basic =   6 (1.28 %)
-Office =   5 (1.06 %)
-.net =   5 (1.06 %)
-Aws =   4 (0.85 %)
-Jquery =   4 (0.85 %)
-Node =   4 (0.85 %)
-Google =   3 (0.64 %)
-Native =   3 (0.64 %)
-Excel =   3 (0.64 %)
-Typescript =   3 (0.64 %)
-Laravel =   3 (0.64 %)
-Azure =   2 (0.43 %)
-Google cloud =   2 (0.43 %)
-Mongodb =   2 (0.43 %)
-Visual studio =   1 (0.21 %)
-Django =   1 (0.21 %)
-Magento =   1 (0.21 %)
-Android =   1 (0.21 %)
-Ruby =   1 (0.21 %)
-Xml =   1 (0.21 %)
-Go =   1 (0.21 %)
-Flask =   1 (0.21 %)
-Blockchain =   1 (0.21 %)
-Back-end =   1 (0.21 %)
-Scala =   1 (0.21 %)
-Bash =   1 (0.21 %)
-Perl =   1 (0.21 %)
-Vagrant =   1 (0.21 %)
+Laurea =   20 (7.78 %)
+Javascript =   20 (7.78 %)
+Java =   17 (6.61 %)
+Sql =   12 (4.67 %)
+Framework =   12 (4.67 %)
+Git =   11 (4.28 %)
+Html5 =   11 (4.28 %)
+Css =   11 (4.28 %)
+Database =   10 (3.89 %)
+React =   10 (3.89 %)
+Html =   9 (3.5 %)
+Cloud =   8 (3.11 %)
+Css3 =   8 (3.11 %)
+Angular =   8 (3.11 %)
+Php =   6 (2.33 %)
+C =   6 (2.33 %)
+C+ =   6 (2.33 %)
+Server =   6 (2.33 %)
+Front-end =   6 (2.33 %)
+Api =   5 (1.95 %)
+.js =   4 (1.56 %)
+Linux =   4 (1.56 %)
+Python =   4 (1.56 %)
+Vue =   3 (1.17 %)
+Aws =   3 (1.17 %)
+Docker =   3 (1.17 %)
+Jquery =   3 (1.17 %)
+Full stack =   3 (1.17 %)
+Basic =   3 (1.17 %)
+Native =   3 (1.17 %)
+Typescript =   3 (1.17 %)
+Office =   2 (0.78 %)
+Excel =   2 (0.78 %)
+.net =   1 (0.39 %)
+Google =   1 (0.39 %)
+Visual studio =   1 (0.39 %)
+Django =   1 (0.39 %)
+Microsoft =   1 (0.39 %)
+Azure =   1 (0.39 %)
+Google cloud =   1 (0.39 %)
+Magento =   1 (0.39 %)
+Node =   1 (0.39 %)
+Mongodb =   1 (0.39 %)
+Android =   1 (0.39 %)
+Ruby =   1 (0.39 %)
+Xml =   1 (0.39 %)
+Go =   1 (0.39 %)
+Laravel =   1 (0.39 %)
 
  
  URL = junior+developer 
@@ -68,11 +61,6 @@ Job = milano
 id = sj_272014622c9749ea,
 Title = Junior Developer,
 Company = Futura Consulting 
-============================================== 
- 
-id = sj_295ea8f92b4be23e,
-Title = Junior Developer,
-Company = Monphy Program 
 ============================================== 
  
 id = sj_c8b768f9abaff287,
@@ -100,16 +88,6 @@ Title = JUNIOR JAVA DEVELOPER,
 Company = ACTION ICT SRL 
 ============================================== 
  
-id = sj_272bb91efbd85996,
-Title = Software Developer Junior,
-Company = FORMULA IMPRESOFT S.P.A. 
-============================================== 
- 
-id = sj_a42974c03e64a158,
-Title = Junior Full Stack Developer,
-Company = LUTECH S.P.A. 
-============================================== 
- 
 id = job_b65505cabbc189c6,
 Title = Junior Developer - Milano [IFS],
 Company = PwC 
@@ -120,13 +98,18 @@ Title = JUNIOR FRONT END DEVELOPER,
 Company = Crispy Bacon srl 
 ============================================== 
  
-id = sj_fb37d6df0044652c,
-Title = C++ Junior Developer - azienda finale (VA) [cdf],
-Company = LAVOROPIU' S.P.A. AGENZIA PER IL LAVORO 
+id = sj_272bb91efbd85996,
+Title = Software Developer Junior,
+Company = FORMULA IMPRESOFT S.P.A. 
 ============================================== 
  
-id = sj_7847045a6e7b0a50,
-Title = Junior Developer (MI),
+id = sj_a42974c03e64a158,
+Title = Junior Full Stack Developer,
+Company = LUTECH S.P.A. 
+============================================== 
+ 
+id = sj_fb37d6df0044652c,
+Title = C++ Junior Developer - azienda finale (VA) [cdf],
 Company = LAVOROPIU' S.P.A. AGENZIA PER IL LAVORO 
 ============================================== 
  
@@ -135,19 +118,19 @@ Title = Frontend Junior Developer,
 Company = Vidiemme Consulting 
 ============================================== 
  
+id = job_d582f80048c46fa1,
+Title = Junior Front-End Developer Glint,
+Company = OneDay Group 
+============================================== 
+ 
+id = sj_7847045a6e7b0a50,
+Title = Junior Developer (MI),
+Company = LAVOROPIU' S.P.A. AGENZIA PER IL LAVORO 
+============================================== 
+ 
 id = sj_9137ef18ee2ee465,
 Title = JUNIOR DEVELOPER PER PIATTAFORME CLOUD,
 Company = UMANA S.p.A. 
-============================================== 
- 
-id = job_0509cd10dc558ddb,
-Title = BOTTEGA VENETA Knitwear & Jersey Junior Product Developer,
-Company = Groupe Kering 
-============================================== 
- 
-id = sj_272bb91efbd85996,
-Title = Software Developer Junior,
-Company = FORMULA IMPRESOFT S.P.A. 
 ============================================== 
  
 id = job_bae7ab2dc76e3372,
@@ -155,14 +138,19 @@ Title = JUNIOR ANGULAR DEVELOPER,
 Company = Nexid Srl 
 ============================================== 
  
+id = job_0509cd10dc558ddb,
+Title = BOTTEGA VENETA Knitwear & Jersey Junior Product Developer,
+Company = Groupe Kering 
+============================================== 
+ 
+id = job_ea7739976a2a360d,
+Title = Junior Web Developer (Internship),
+Company = Instilla 
+============================================== 
+ 
 id = job_c3db57f5bb9671b4,
 Title = Software Developer Junior,
 Company = Formula S.p.A 
-============================================== 
- 
-id = sj_a42974c03e64a158,
-Title = Junior Full Stack Developer,
-Company = LUTECH S.P.A. 
 ============================================== 
  
 id = job_524633c5fb93428f,
@@ -170,9 +158,9 @@ Title = Junior Front-end Web Developer,
 Company = Hifuture srl 
 ============================================== 
  
-id = job_ea7739976a2a360d,
-Title = Junior Web Developer (Internship),
-Company = Instilla 
+id = sj_272bb91efbd85996,
+Title = Software Developer Junior,
+Company = FORMULA IMPRESOFT S.P.A. 
 ============================================== 
  
 id = job_d15160f7fbb16382,
@@ -185,24 +173,19 @@ Title = Junior Java Developer Milano,
 Company = Sogetel 
 ============================================== 
  
-id = job_01d1636e59d8c4c3,
-Title = Junior Developer - Backend o Frontend,
-Company = Piksel SRL 
-============================================== 
- 
 id = job_63b7ab1af842450e,
 Title = JAVA JUNIOR DEVELOPER,
 Company = S2E Srl 
 ============================================== 
  
-id = sj_fb37d6df0044652c,
-Title = C++ Junior Developer - azienda finale (VA) [cdf],
-Company = LAVOROPIU' S.P.A. AGENZIA PER IL LAVORO 
+id = sj_a42974c03e64a158,
+Title = Junior Full Stack Developer,
+Company = LUTECH S.P.A. 
 ============================================== 
  
-id = job_f087609fe4207370,
-Title = Junior Developer,
-Company = H-FARM S.p.A 
+id = job_01d1636e59d8c4c3,
+Title = Junior Developer - Backend o Frontend,
+Company = Piksel SRL 
 ============================================== 
  
 id = job_a2634e61c54d6add,
@@ -210,19 +193,24 @@ Title = Project Developer Junior,
 Company = BayWa r.e. 
 ============================================== 
  
-id = job_9d517222b2287195,
-Title = Junior Cloud Developer,
-Company = KOTUKO SRL 
-============================================== 
- 
-id = job_9d517222b2287195,
-Title = Junior Cloud Developer,
-Company = KOTUKO SRL 
+id = job_f087609fe4207370,
+Title = Junior Developer,
+Company = H-FARM S.p.A 
 ============================================== 
  
 id = job_90d7ef55b8ee668d,
 Title = Digital - Junior - Campaign Automation Developer,
 Company = Deloitte 
+============================================== 
+ 
+id = job_9d517222b2287195,
+Title = Junior Cloud Developer,
+Company = KOTUKO SRL 
+============================================== 
+ 
+id = job_9d517222b2287195,
+Title = Junior Cloud Developer,
+Company = KOTUKO SRL 
 ============================================== 
  
 id = job_342c92e07af625f8,
@@ -235,9 +223,9 @@ Title = Java Junior Developer,
 Company = Vidiemme Consulting 
 ============================================== 
  
-id = job_b68e320db463b488,
-Title = Junior Web Developer,
-Company = BEWE srl 
+id = job_f4a479af8e74d5eb,
+Title = Junior Java Developer,
+Company = Piksel SRL 
 ============================================== 
  
 id = job_b28774a9e4c784c6,
@@ -245,29 +233,14 @@ Title = Junior Developer,
 Company = Ulisse 
 ============================================== 
  
-id = sj_9137ef18ee2ee465,
-Title = JUNIOR DEVELOPER PER PIATTAFORME CLOUD,
-Company = UMANA S.p.A. 
+id = sj_272bb91efbd85996,
+Title = Software Developer Junior,
+Company = FORMULA IMPRESOFT S.P.A. 
 ============================================== 
  
-id = job_f4a479af8e74d5eb,
-Title = Junior Java Developer,
-Company = Piksel SRL 
-============================================== 
- 
-id = job_ebcc1a9f7f1e2324,
-Title = Junior PHP Back-End Developer,
-Company = Facile.it 
-============================================== 
- 
-id = job_5b0f7a8c49a64e43,
-Title = Junior Developer,
-Company = Tucano Urbano 
-============================================== 
- 
-id = job_3969b22289b102ff,
-Title = Frontend Developer Junior,
-Company = Playground SRL 
+id = job_b68e320db463b488,
+Title = Junior Web Developer,
+Company = BEWE srl 
 ============================================== 
  
 id = job_67a6a304d27b3a78,
@@ -275,24 +248,24 @@ Title = JAVA DEVELOPER JUNIOR,
 Company = S2E Srl 
 ============================================== 
  
-id = sj_e9a204478b0c4938,
-Title = Python Developer (Junior),
-Company = Orienta SpA 
+id = job_3969b22289b102ff,
+Title = Frontend Developer Junior,
+Company = Playground SRL 
 ============================================== 
  
-id = job_b7a40ae51e7a1c04,
-Title = JUNIOR BUSINESS DEVELOPER HSE,
-Company = Bureau Veritas 
+id = job_ebcc1a9f7f1e2324,
+Title = Junior PHP Back-End Developer,
+Company = Facile.it 
 ============================================== 
  
-id = job_7f1fdf89c6f586be,
-Title = Junior Backend Developer - Milano,
-Company = Deloitte 
+id = sj_a42974c03e64a158,
+Title = Junior Full Stack Developer,
+Company = LUTECH S.P.A. 
 ============================================== 
  
-id = job_44867c058a3e5ec9,
-Title = Javascript/Java Developer Junior,
-Company = Business Changers 
+id = job_5b0f7a8c49a64e43,
+Title = Junior Developer,
+Company = Tucano Urbano 
 ============================================== 
  
 id = job_fc6eafb1d6d413b3,
@@ -300,143 +273,13 @@ Title = Junior Developer,
 Company = APraise 
 ============================================== 
  
-id = job_8ba64118f5103dd3,
-Title = Junior - Deloitte Digital - CMS Developer,
-Company = Deloitte 
+id = job_b7a40ae51e7a1c04,
+Title = JUNIOR BUSINESS DEVELOPER HSE,
+Company = Bureau Veritas 
 ============================================== 
  
-id = job_fc695973de51ca81,
-Title = Junior Full Stack Developer,
-Company = TEIA Technologies S.r.l 
-============================================== 
- 
-id = sj_272bb91efbd85996,
-Title = Software Developer Junior,
-Company = FORMULA IMPRESOFT S.P.A. 
-============================================== 
- 
-id = job_5caf4c8bd6b4361b,
-Title = JUNIOR DEVELOPER,
-Company = Relatech Spa 
-============================================== 
- 
-id = job_e78a4f47eb3e0e61,
-Title = JUNIOR FULL STACK DEVELOPER,
-Company = Deloitte 
-============================================== 
- 
-id = sj_a42974c03e64a158,
-Title = Junior Full Stack Developer,
-Company = LUTECH S.P.A. 
-============================================== 
- 
-id = job_3efda5e4dcf48fcf,
-Title = Posizione per Neolaureati e Sviluppatori Junior,
-Company = Balance 
-============================================== 
- 
-id = job_c8fb65b5f450b90d,
-Title = Junior Full Stack Developer – Bologna,
-Company = A.B.S. Srl 
-============================================== 
- 
-id = job_f07df9db7abc5960,
-Title = Junior Developer,
-Company = SPINDOX SPA 
-============================================== 
- 
-id = job_a1b1a7ce16dc3351,
-Title = Digital - Junior - Salesforce Developer Milano,
-Company = Deloitte 
-============================================== 
- 
-id = job_8f13347b15221c03,
-Title = Big Data Junior Developer,
-Company = Sync Lab srl 
-============================================== 
- 
-id = job_a94de3b1fbca39a0,
-Title = Developer Junior,
-Company = iTuna 
-============================================== 
- 
-id = job_877dd3937d789b5b,
-Title = Junior software developer,
-Company = DocuMI 
-============================================== 
- 
-id = job_f801d2dc5835362f,
-Title = JUNIOR DEVELOPER | SVILUPPATORE JUNIOR | SOFTWARE DEVELOPER,
-Company = Techyon 
-============================================== 
- 
-id = job_ff2b9beb3421b512,
-Title = Junior Software Developer Java,
-Company = Dedalus Italia S.p.A. 
-============================================== 
- 
-id = sj_272bb91efbd85996,
-Title = Software Developer Junior,
-Company = FORMULA IMPRESOFT S.P.A. 
-============================================== 
- 
-id = job_0b82dc899f3efe4e,
-Title = Software Developer Junior (Microsoft C#),
-Company = IoT10 Srl 
-============================================== 
- 
-id = sj_49d592b5712869c1,
-Title = Web Developer | Importante realtà digitale e innovativa,
-Company = Michael Page 
-============================================== 
- 
-id = job_d53f674a6381c772,
-Title = JUNIOR FULL STACK DEVELOPER,
-Company = RGIS Italy 
-============================================== 
- 
-id = job_d0567b0c92fd8425,
-Title = JUNIOR PACKAGING PROJECT DEVELOPER - SETTORE COSMETICO,
-Company = PREMI S.P.A. 
-============================================== 
- 
-id = job_15ab1fdefa4fd92a,
-Title = JUNIOR FRONT-END DEVELOPER,
-Company = Adami & Associati 
-============================================== 
- 
-id = job_6ba15f93ab4991f2,
-Title = Junior Software Engineer,
-Company = MainStreaming 
-============================================== 
- 
-id = job_1f7798948de47b08,
-Title = Junior Software Developer,
-Company = Omega Sistemi 
-============================================== 
- 
-id = job_6c7c6152082a526e,
-Title = Junior Web Developer,
-Company = Page Personnel Italia 
-============================================== 
- 
-id = sj_a42974c03e64a158,
-Title = Junior Full Stack Developer,
-Company = LUTECH S.P.A. 
-============================================== 
- 
-id = job_f28673cd700216b7,
-Title = Node.js Junior Developer,
-Company = Vidiemme Consulting 
-============================================== 
- 
-id = job_94c502aea9c77d61,
-Title = Junior Solar Project Developer, Italy,
-Company = Aquila Group 
-============================================== 
- 
-id = job_8f5779a81543626e,
-Title = JUNIOR - DELOITTE DIGITAL - COMMERCE DEVELOPER,
-Company = Deloitte 
+id = job_aab30473382970be,
+Title = ANGULAR DEVELOPER junior (remoto),
+Company = Omicron Srl 
 ============================================== 
  
