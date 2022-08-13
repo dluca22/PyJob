@@ -7,10 +7,7 @@ import time
 
 # this one gets user input and scrapes the website for job offers
 # then sends to the helper function the description to analize and store relevant data
-
-# define brower agent to show
-# agent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0'}
-
+agent = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 
 # ===========================================================
@@ -41,7 +38,7 @@ if __name__ == '__main__':
                 # add it to the set
                 searched_ids.add(j['id'])
                 # pull the listing for the offer
-                page_object = pull_listing_data('https://it.indeed.com' + j['job_link'])
+                page_object = pull_listing_data('http://it.indeed.com' + j['job_link'])
                 try:
                     description = get_description(page_object)
                 except AttributeError:
@@ -53,7 +50,7 @@ if __name__ == '__main__':
         # dev_mode trigger
         if dev_mode == True:
             timing = time.time() - start_time
-            print_to_file(dev_mode, timing, searched_ids, jobList, url, job_search, place)
+            print_to_file(dev_mode, timing, searched_ids, jobList, job_search, place)
         elif chart == True:
             pie_chart()
         else:
@@ -78,7 +75,7 @@ if __name__ == '__main__':
             # but if arguments are 2 and the second is 'dev_mode'
             if len(args) == 3 and args[2].lower() in ('-g', '-c', '--graph', '--chart'):
                 chart = True
-            if len(args) == 3 and args[2] == 'dev_mode':
+            if len(args) == 3 and args[2] in ['dev_mode', 'dev']:
                     # set developer mode as True
                 dev_mode = True
             # if argv[1] is a number convert as page int
@@ -128,12 +125,14 @@ if __name__ == '__main__':
     # returns the HTML of the page
     def extract(page, place, job_search):
         # global url
-        headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
+
         # page 1 starts at 0, then increments of 10
-        url = f'https://it.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
+        url = f'http://it.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
         # url_usa = f'https://www.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
 
-        r = requests.get(url, headers=headers)
+        r = requests.get(url, headers=agent)
+        if r.status_code == 403:
+            sys.exit("Request returned <403>")
 
         # returns the DOM object
         soup = BeautifulSoup(r.content, 'html.parser')
@@ -176,8 +175,9 @@ if __name__ == '__main__':
 # ===========================================================
     # extracts the DOM from every job link page
     def pull_listing_data(job_link):
+        global agent
+        r = requests.get(job_link, headers=agent)
 
-        r = requests.get(job_link, agent)
         jobSoup = BeautifulSoup(r.content, 'html.parser')
 
         return jobSoup
