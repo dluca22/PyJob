@@ -1,45 +1,35 @@
-from analize import analisis, print_to_file
-from arguments import help
 from bs4 import BeautifulSoup
 import requests
-import re
 import sys
-import time
 
-agent = {'User-Agent' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'}
 
-def extract(page):
+def request(page):
         place = 'Milano'
         job_search = 'junior+developer'
-
-        url = f'https://it.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
+# global url
+        headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
+        # page 1 starts at 0, then increments of 10
+        url2 = 'http://it.indeed.com'
+        # only changed https to http
+        url = f'http://it.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
+        # url_usa = f'https://www.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
         print(url)
 
-        r = requests.get(url, agent)
-        # print("r is ", type(r))
-        # returns the DOM object
-        soup = BeautifulSoup(r.content, 'html.parser')
-        # print("soup is ", type(soup))
-        time.sleep(3)
-        divs = soup.find_all('div', class_='jobsearch-JobCountAndSortPane-jobCount')
-        print("len of divs", len(divs))
-        print(divs)
+        x = requests.get(url2, headers=headers)
+        r = requests.get(url, headers=headers)
 
-        # with open('test.txt', 'w') as test:
-        #     for div in divs:
-        #         test.write(div)
-        # #         div.find('div', class_="jobsearch-LeftPane")
-        # #         # print(div.text)
-        # # #     total_listings = soup.find_all('div', class_='jobsearch-JobCountAndSortPane-jobCount')
-        # #         # test.write(div.text)
+        # x.cookies.clear()
 
-        sys.exit("mio exit")
-        # # sys.exit(f'this {len(total_listings)}')
+        print(f"{r.status_code} \n {r.request.headers}")
+        print(f"{x.status_code} \n {x.request.headers}")
 
-        return soup
+
+
+        sys.exit()
+
 
 def main():
-    extract(0)
+    request(10)
 
 
 main()
