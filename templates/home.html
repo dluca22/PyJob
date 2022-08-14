@@ -1,0 +1,16 @@
+{%extends "layout.html" %}
+
+{%block title%} custom page {%endblock%}
+
+{%block body%}
+<div class="header">
+    <h1>Hello</h1>
+    <h2>Welcome to Skill Rank!</h2>
+</div>
+<div class="presentation">
+    <p>This web-app will return, based on your job search and desired location, a list of the most required skills that employers are looking for!</p>
+    <p>Just enter the job you're looking for and your desired location, and you'll be served and updated list of skills that are being required the most!</p>
+</div>
+{%block another%} {% endblock %}
+<button><a href="/start">continue</a></button>
+{%endblock%}
