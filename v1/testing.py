@@ -1,4 +1,4 @@
-from analize import analisis, print_to_file
+from analize_module import analisis, print_to_file
 from arguments import help
 from bs4 import BeautifulSoup
 import requests

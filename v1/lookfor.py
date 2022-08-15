@@ -1,4 +1,4 @@
-from analize import analisis, print_to_file, pie_chart
+from analize_module import analisis, print_to_file, pie_chart
 from bs4 import BeautifulSoup
 import requests
 import re

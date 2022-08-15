@@ -1,10 +1,15 @@
 {%extends "index.html"%}
 
 {%block result%}
-
-<p>{{place}}</p>
-<p>{{job}}</p>
-
-
 <button ><a href="/index">Go back</a></button>
+
+<h3>{{place.upper()}}</h3>
+<h3>{{job.upper()}}</h3>
+
+{% for k, v in result_dict.items()%}
+<li style="list-style: none ;"><b>{{k}}</b><b>{{v}}</b></li>
+{%endfor%}
+<p>ok</p>
+
+
 {% endblock %}

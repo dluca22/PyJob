@@ -5,7 +5,7 @@
 {%block body%}
 <div class="container-sm my-5 ">
     <div class="header">
-        <h1>Hello</h1>
+        <h1><a href="/">Hello</a></h1>
         <h2>Welcome to Skill Rank!</h2>
     </div>
     <div class="presentation">
@@ -19,18 +19,31 @@
     </div>
 </div>
 <div class="container-sm my-2-px-4">
-
+    <!-- form di input con le due inpot box e pulsante -->
+    <!-- <form action="/search" method="post">
+        # inputText di PLACE
+        <div class="row g-0 justify-content-center align-items-start">
+            <div class="col-4">
+                <input class="form-control rounded-0 rounded-start" type="text" placeholder="City" aria-label="place" name="place" required>
+            </div>
+            <div class="col-4">
+                 # inputText di JOB
+                <input class="form-control rounded-0 rounded-end" type="text" placeholder="Job to search" name="job_search" required>
+            </div>
+            <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
+        </div> -->
+<!-- temporary radius prechecked values -->
     <form action="/search" method="post">
-        <div class="row align-items-start">
-            <div class="col">
-                <input class="form-control" type="text" placeholder="Job to search" name="job_search" required>
+        <div class="row g-0 justify-content-center align-items-start">
+            <div class="col-4">
+                <input type="radio" name="place" value="milano" checked="checked"> <span class="default-input">Milano</span>
             </div>
-            <div class="col">
-                <input class="form-control" type="text" placeholder="City" aria-label="place" name="place" required>
+            <div class="col-4">
+                <input type="radio" name="job_search" value="pentester" checked="checked"> <span class="default-input">Pentester</span>
             </div>
+            <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
         </div>
 
-        <input class="btn btn-primary mb-3" type="submit" value="Submit">
     </form>
 
 
@@ -51,9 +64,11 @@
             </div>
             <div class="col">
                 <div class="info rounded-3">
-                    {% block result%}
+                    <ul>
+                        {% block result%}
 
-                    {%endblock%}
+                        {%endblock%}
+                    </ul>
                 </div>
             </div>
 

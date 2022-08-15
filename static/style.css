@@ -8,7 +8,8 @@ div{
     align-items: center;
 }
 h1 {
-    color: #e76f51;
+    color: #e76f51 !important;
+    text-decoration-line: none;
 }
 h2 {
     color: #f4a261
@@ -25,4 +26,9 @@ h2 {
 }
 .rounded-3 {
         border-radius: 1.5rem !important;
+}
+
+.default-input {
+    font-weight: bolder;
+    color:aliceblue
 }
