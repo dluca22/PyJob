@@ -1,23 +1,37 @@
+from crypt import methods
 from distutils.log import debug
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
 
+
+dict = {}
 
 
 @app.route("/")
 @app.route("/home")
 @app.route("/index")
 def index():
+    global dict
 
-    dict = {}
     with open("list_of_keys.txt", "r") as file:
         for line in file:
             dict[line.strip()] = 0
 
 
     return render_template("index.html", dict=dict)
+
+@app.route("/search", methods=['GET', 'POST'])
+def start_search():
+    global dict
+    if request.method == 'POST':
+        place = request.form['place']
+        job = request.form['job_search']
+
+        return render_template("result.html", place=place, job=job, dict=dict)
+    else:
+        return "error"
 
 # @app.route("/test")
 # def test():

@@ -9,42 +9,55 @@
         <h2>Welcome to Skill Rank!</h2>
     </div>
     <div class="presentation">
-        <p>This web-app will return, based on your job search and desired location, a list of the most required skills that
+        <p>This web-app will return, based on your job search and desired location, a list of the most required skills
+            that
             employers are looking for!</p>
-        <p>Just enter the job you're looking for and your desired location, and you'll be served and updated list of skills
+        <p>Just enter the job you're looking for and your desired location, and you'll be served and updated list of
+            skills
             that are being required the most!</p>
 
     </div>
 </div>
 <div class="container-sm my-2-px-4">
-</div>
-<input class="form-control" type="text" placeholder="Job to search" aria-label="job_search">
-<input class="form-control" type="text" placeholder="City" aria-label="place">
-<div class="col-auto">
-    <button type="submit" class="btn btn-primary mb-3" >Submit</button>
-  </div>
+
+    <form action="/search" method="post">
+        <div class="row align-items-start">
+            <div class="col">
+                <input class="form-control" type="text" placeholder="Job to search" name="job_search" required>
+            </div>
+            <div class="col">
+                <input class="form-control" type="text" placeholder="City" aria-label="place" name="place" required>
+            </div>
+        </div>
+
+        <input class="btn btn-primary mb-3" type="submit" value="Submit">
+    </form>
 
 
-<div class="main-section container text-center">
-    <div class="row align-items-start">
 
 
-        <div class="col">
-            <div class="results rounded-3">
-                <ul>
-                    {% for k, v in dict.items()%}
+    <div class="main-section container text-center">
+        <div class="row align-items-start">
+
+
+            <div class="col">
+                <div class="results rounded-3">
+                    <ul>
+                        {% for k, v in dict.items()%}
                         <li style="list-style: none ;"><b>{{k}}</b></li>
-                    {%endfor%}
-                </ul>
+                        {%endfor%}
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="info rounded-3">
-                <p>test 2</p>
+            <div class="col">
+                <div class="info rounded-3">
+                    {% block result%}
+
+                    {%endblock%}
+                </div>
             </div>
+
+
         </div>
 
-
-    </div>
-
-    {%endblock%}
+        {%endblock%}

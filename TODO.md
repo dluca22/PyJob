@@ -1,18 +1,21 @@
 **Da Fare:**
+x- sistemare colonne e box anche dell'header con boostratp e dare un senso centrale e flessibile alla pagina intera
+x- passare da list  a dict
+x- lista di dict.keys non items di list
+x
+
 - re-imparare bootstrap
 - mettere giu in layout semplice ma vagamente interessante
-- sistemare colonne e box anche dell'header con boostratp e dare un senso centrale e flessibile alla pagina intera
-- passare da list  a dict
-- lista di dict.keys non items di list
-
 - implementare js
 - studiare boostrap js
-- testare basicametne il codice coem da CLI
+- testare basicametne il codice come da CLI
 
 **Fatto:**
-- implementato Bootstrap
 - messo auto reload 1 secondo perche non funzionava livereload o altro
 - testare di non mettere 1 secondo reload ma lasciare originale e vedere se si aggiorna come dicono gli altri
+- creato funzione di submit, i valori vengono passati giusti
+- dichiarato dict globale per averlo persistente anche nella pagina results
+-
 
 
 **Commands:**
