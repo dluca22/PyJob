@@ -3,33 +3,43 @@
 {%block title%} index {%endblock%}
 
 {%block body%}
-<div class="header">
-    <h1>Hello</h1>
-    <h2>Welcome to Skill Rank!</h2>
+<div class="container-sm my-5 ">
+    <div class="header">
+        <h1>Hello</h1>
+        <h2>Welcome to Skill Rank!</h2>
+    </div>
+    <div class="presentation">
+        <p>This web-app will return, based on your job search and desired location, a list of the most required skills that
+            employers are looking for!</p>
+        <p>Just enter the job you're looking for and your desired location, and you'll be served and updated list of skills
+            that are being required the most!</p>
+
+    </div>
 </div>
-<div class="presentation">
-    <p>This web-app will return, based on your job search and desired location, a list of the most required skills that
-        employers are looking for!</p>
-    <p>Just enter the job you're looking for and your desired location, and you'll be served and updated list of skills
-        that are being required the most!</p>
-    <p>test</p>
+<div class="container-sm my-2-px-4">
 </div>
+<input class="form-control" type="text" placeholder="Job to search" aria-label="job_search">
+<input class="form-control" type="text" placeholder="City" aria-label="place">
+<div class="col-auto">
+    <button type="submit" class="btn btn-primary mb-3" >Submit</button>
+  </div>
+
 
 <div class="main-section container text-center">
     <div class="row align-items-start">
 
 
         <div class="col">
-            <div class="results">
+            <div class="results rounded-3">
                 <ul>
-                    {% for item in list%}
-                        <li style="list-style: none ;">{{item}}</li>
+                    {% for k, v in dict.items()%}
+                        <li style="list-style: none ;"><b>{{k}}</b></li>
                     {%endfor%}
                 </ul>
             </div>
         </div>
         <div class="col">
-            <div class="info">
+            <div class="info rounded-3">
                 <p>test 2</p>
             </div>
         </div>
