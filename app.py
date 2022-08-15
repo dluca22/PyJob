@@ -16,7 +16,7 @@ def index():
         for line in file:
             list.append(line)
             
-    return render_template("index.html", list=list)
+    return render_template("index.html", list)
 
 # @app.route("/test")
 # def test():
