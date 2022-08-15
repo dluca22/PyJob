@@ -2,7 +2,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #252526 ;
+    background-color: #4b4b4e !important;
 }
 div{
     align-items: center;
@@ -15,4 +15,11 @@ h2 {
 }
 .presentation {
     color: #2a9d8f;
+}
+
+.results {
+    background-color: yellow;
+}
+.info {
+    background-color: #e76f51;
 }
