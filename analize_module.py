@@ -1,16 +1,7 @@
-from fileinput import filename
 import re
-import sys
 import time
-# from dictionary import languages
 import matplotlib.pyplot as plt
-from flask import url_for
 
-
-# gets data from main program and analize the text
-# outputs data to a file
-
-# this is an helper function, so it works independently from the source of the data (in this case indeed, but later should manage the same text from other websites/listing)
 
 # second dictionary with only non zero values
 result_dict = {}
@@ -20,8 +11,6 @@ counter = 0
 
 def analisis(text, default_dict):
     global result_dict, counter
-
-    # CHANGE "languages", should not be imported from a py file but from the later defined dict
 
     # matches = list that gets populated by every occurence of the key of the dictionary
     matches = []
@@ -46,7 +35,6 @@ def analisis(text, default_dict):
                 # else creates a new k:v pair
                 result_dict.update({k : v})
 
-            # fine analize()
 # ===========================================================
 
 def elaborate():
@@ -55,29 +43,12 @@ def elaborate():
     global counter
 
     elaborated = percent_calc(sort_dictionary(result_dict))
-    # sys.exit(list(elaborated.values()))
+
     finish_time = time.time()
-    # pretty format header of the output file
-    # output.write(f'Skill = Nr. of matches (% of relevance) \n')
-    # output.write(f'Total keywords matching: {counter} in {len(ids)} unique offers \n \n')
 
-    # # in dev_mode print matches and time taken (add num of pages and maybe links to every job offer)
-    # # writes the counter of ALL matches, the total of unique offers searched (set of ids)
-    # if dev_mode ==True:
-    #     output.write(f'<Time: {round(timing, 2)}s > \n')
-    #     output.write('(other useless things for dev_mode) \n \n')
-
-    # # for every key and value of the dict > write a line to the output file
-
-    # REMOVE
-    # for k, v in elaborated.items():
-    #         output.write(f"{k.capitalize()} =   {result_dict[k]} ({v} %)\n")
     pie_chart(elaborated)
 
     return elaborated, finish_time, counter
-
-
-# print to file every checked job title and job link (but it's kinda useless for what i need)
 
 
 # ===========================================================

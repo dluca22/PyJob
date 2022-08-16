@@ -1,12 +1,10 @@
-from analize_module import analisis, elaborate, pie_chart
+from analize_module import analisis, elaborate
 from bs4 import BeautifulSoup
 import requests
 import re
 import sys
-import time
 import app
 
-# this one gets user input and scrapes the website for job offers
 # then sends to the helper function the description to analize and store relevant data
 agent = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
@@ -37,97 +35,10 @@ def search(place, job_search, default_dict, user_dict=None, page=0):
             #  call analisis to do string match
 
             analisis(description, default_dict)
-    
+
     elaborate()
 
-
-
-
-
-
-# def main():
-
-#     start_time = time.time()
-#     dev_mode = False # False DEFAULT VAL
-#     searched_ids = set()
-#     chart = False
-
-#        # creates a lists from function
-#     jobList = extract_from_page(place, job_search, page=0)
-
-#     # for every element of the list open the job page and extract the description as lowercase text
-#     for j in jobList:
-#         # if the job 'id' is not in the set of already searched
-#         if j['id'] not in searched_ids:
-#             # add it to the set
-#             searched_ids.add(j['id'])
-#             # pull the listing for the offer
-#             page_object = pull_listing_data('http://it.indeed.com' + j['job_link'])
-#             try:
-#                 description = get_description(page_object)
-#             except AttributeError:
-#                 sys.exit("Service on Indeed temporarily unavailable")
-#             # for every job page that has not yet been analized
-#             #  call analisis to do string match
-#             analisis(description)
-
-#     # dev_mode trigger
-#     if dev_mode == True:
-#         timing = time.time() - start_time
-#         print_to_file(dev_mode, timing, searched_ids, jobList, job_search, place)
-#     elif chart == True:
-#         pie_chart()
-#     else:
-#         #if no dev_mode, function has default parameters
-#         print_to_file(ids=searched_ids)
-
-# # end of main()
 # ===========================================================
-
-
-# def argv_commands(args, dev_mode=False, chart=False):
-#     usage_message = "Usage: $ python3 lookfor.py [pages 1-5, default=1] [dev_mode, default=OFF]"
-
-#     # if 1 argum is "help" print help message
-#     if len(args) == 2 and args[1].lower() in ('help', '--help'):
-#         sys.exit(help())
-
-#     # if more than 2 arguments
-#     elif len(args) > 3:
-#         sys.exit(f"Invalid number of arguments!!!! \n{usage_message}")
-#     # if 1 or 2 arguments passed
-
-#     elif len(args) >= 2:
-#         # but if arguments are 2 and the second is 'dev_mode'
-#         if len(args) == 3 and args[2].lower() in ('-g', '-c', '--graph', '--chart'):
-#             chart = True
-#         if len(args) == 3 and args[2] in ['dev_mode', 'dev']:
-#                 # set developer mode as True
-#             dev_mode = True
-#         # if argv[1] is a number convert as page int
-#         try:
-#             page = int(args[1])
-#             # if dev_mode active, list up to 15 pages
-#             if dev_mode == True:
-#                 if page in range(1, 16):
-#                     page = (page - 1) * 10
-#                 else:
-#                     sys.exit("Error: Dev_mode only accept numbers 1 to 15")
-#             # only accept 1-5
-#             else: #if dev_mode is off
-#                 if page in range(1, 6):
-#                     page = (page - 1) * 10
-#                 else:
-#                     sys.exit("Error: can only accept numbers 1 to 5")
-#         # if argv[1] not a number
-#         except ValueError:
-#             sys.exit(f"!!! ERROR - not a number!!! \n{usage_message}")
-
-#     return page, dev_mode, chart
-
-# ===========================================================
-
-
 
 # formats user input to match url specifications
 def format_entry(entry):
@@ -136,8 +47,8 @@ def format_entry(entry):
     formatted = re.sub(r"\s+", '+', entry.strip())
 
     return formatted
-# ===========================================================
 
+# ===========================================================
 
 def extract_from_page(place, job_search, page=0):
     # empty job list to be filled with dicts
@@ -150,8 +61,8 @@ def extract_from_page(place, job_search, page=0):
         for p in range(0, page +1, 10):
             jobList.extend(transform(extract(p, place, job_search)))
     return jobList
-# ===========================================================
 
+# ===========================================================
 
 
 # returns the HTML of the page
@@ -172,7 +83,6 @@ def extract(page, place, job_search):
     return soup
 
 # ===========================================================
-
 
 
 # gets all the divs
@@ -219,11 +129,7 @@ def pull_listing_data(job_link):
     return jobSoup
 
 
-
-
 # ===========================================================
-
-
 
 # returns the text for the job offer description
 def get_description(jobSoup):
