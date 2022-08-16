@@ -10,7 +10,7 @@ import logging
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
-dict = {}
+dict_from_text = {}
 searched_ids = set()
 
 
@@ -19,53 +19,60 @@ searched_ids = set()
 @app.route("/home")
 @app.route("/index")
 def index():
-    global dict
+    global dict_from_text
 
     with open("list_of_keys.txt", "r") as file:
         for line in file:
-            dict[line.strip()] = 0
+            dict_from_text[line.strip()] = 0
 
 
-    return render_template("index.html", dict=dict)
+    return render_template("index.html", dict=dict_from_text)
 
 @app.route("/search", methods=['GET', 'POST'])
 def start_search():
-    global dict
+
+
     if request.method == 'POST':
+        # setting variables
+        start_time = time.time()
+        dev_mode = False # False DEFAULT VAL
+        searched_ids = set()
+        chart = False
+
+        # get values from request form
         place = request.form['place']
         job = request.form['job_search']
-        jobList = extract_from_page(place=place, job_search=job)
-        ordered_result = {}
-        ok = ""
 
+        # chiama funzione e ritorna lista (page e logica è definito dentro la funzione )
+        jobList = extract_from_page(place = place, job_search = job)
+        ordered_result = {}
+
+        # se il job id non è nella lista, pull description dal suo link
         for j in jobList:
             if j['id'] not in searched_ids:
                 # add it to the set
                 searched_ids.add(j['id'])
                 # pull the listing for the offer
-                page_object = pull_listing_data('https://it.indeed.com' + j['job_link'])
+                page_object = pull_listing_data('http://it.indeed.com' + j['job_link'])
                 try:
                     description = get_description(page_object)
-                    ok = "ok"
+
                 except AttributeError:
-                    return render_template("error_page.html", error="There was an error on line 45 after page_object")
+                    return render_template("error_page.html", error="Service on Indeed is temporarily unavailable")
 
 
                 # for every job page that has not yet been analized
                 #  call analisis to do string match
+                ordered_result= percent_calc(sort_dictionary(analisis(description)))
 
-                # ordered_result= percent_calc(sort_dictionary(analisis(description)))
 
-                ordered_result = {'a':2, 'b': 5, 'c':6}
-        # instead of passing various arguments, i put them in a dict and passed to render templates an **unpacked_dict
-                print(ordered_result, flush=True)
-                app.logger.info('This is info output')
-        variables = {"place": place, "job":job, "dict":dict, "result_dict":ordered_result}
-        # time.sleep(22)
-        # return render_template("result.html", **variables)
-        return render_template("result.html", place=place, job=job, dict=dict, result_dict=ordered_result, ok=ok)
+        # instead of passing various arguments,  put them in a dict and pass that to render templates as an **unpacked_dict
+
+        time.sleep(10)
+
+        return render_template("result.html", place=place, job=job, dict=dict_from_text, result_dict=ordered_result, jobList=jobList)
     else:
-        return error("There was an error on line 55 else>method!=post")
+        return error("There was an error on line 55 else > method !=post")
 
 @app.route("/error")
 def error(error):
@@ -91,5 +98,5 @@ if __name__ == "__main__":
 
     # TEMP - reload every secondss
     while True:
-        sleep(1)
+        time.sleep(1)
         app.run()

@@ -18,13 +18,16 @@ counter = 0
 def analisis(text):
     global result_dict, counter
 
+    # CHANGE "languages", should not be imported from a py file but from the later defined dict
+
     # matches = list that gets populated by every occurence of the key of the dictionary
     matches = []
 
     # looping over keys in the dict, it assigns the number of times the str gets appended to matches[]
     for key in languages:
+        #  \bWORD\b matches unique expression that is not part of another word
         matches = re.findall(rf'\b{key}\b', text)
-        # if it matches creates a list with all occurences
+        # if it matches default creates a list with all occurences
         if len(matches) >= 1:
             # just counts EVERY matches found for dev_mode
             counter = counter + len(matches)
