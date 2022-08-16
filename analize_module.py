@@ -1,6 +1,6 @@
 import re
 import sys
-from dictionary import languages
+# from dictionary import languages
 # import matplotlib.pyplot as plt
 
 
@@ -15,7 +15,7 @@ counter = 0
 
 # ===========================================================
 
-def analisis(text):
+def analisis(text, default_dict):
     global result_dict, counter
 
     # CHANGE "languages", should not be imported from a py file but from the later defined dict
@@ -24,7 +24,7 @@ def analisis(text):
     matches = []
 
     # looping over keys in the dict, it assigns the number of times the str gets appended to matches[]
-    for key in languages:
+    for key in default_dict:
         #  \bWORD\b matches unique expression that is not part of another word
         matches = re.findall(rf'\b{key}\b', text)
         # if it matches default creates a list with all occurences
@@ -32,10 +32,10 @@ def analisis(text):
             # just counts EVERY matches found for dev_mode
             counter = counter + len(matches)
             # just add 1 to the dict
-            languages[key] += 1
+            default_dict[key] += 1
 
         # new dict with only the keys that are not 0
-        for k, v in languages.items():
+        for k, v in default_dict.items():
             if v != 0:
                 # if key is already present, adds the value
                 if  k in result_dict:

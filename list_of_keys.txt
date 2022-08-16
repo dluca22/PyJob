@@ -1,122 +1,122 @@
-.js 
-.net 
-algol 
-ams 
-android 
-android studio 
-angular 
-ansible 
-api 
-applescript 
-assembly language 
-atomation 
-autohotkey 
-aws 
-azure 
-back-end 
-bash 
-basic 
-batch 
-bitbucket 
-blockchain 
-brew 
-c 
-c# 
-c+ 
-cloud 
-cobol 
-component pascal 
-css 
-css3 
-curl 
-dart 
-database 
-dbase 
-delphi 
-django 
-docker 
-ecmascript 
-excel 
-fastapi 
-ffp 
-fireship 
-flask 
-flutter 
-fortran 
-framework 
-front-end 
-ftp 
-full stack 
-g-code 
-git 
-github 
-gitlab 
-gnu 
-go 
-go! 
-google 
-google cloud 
-hack 
-hacking 
-high level assembly 
-html 
-html5 
-ibm basic assembly language 
-j 
-java 
-javascript 
-jquery 
-kotlin 
-ksh 
-laravel 
-laurea 
-linux 
-lua 
-mac os 
-machine code 
-magento 
-microcode 
-microsoft 
-mongodb 
-native 
-node 
-npl 
-office 
-oop 
-opencl 
-pascal 
-pearl 
-perl 
-php 
-powershell 
-python 
-rails 
-react 
-ruby 
-runescript 
-rust 
-scala 
-scilab 
-scratch 
-sequel 
-server 
-sql 
-ssh 
-swift 
-sysadmin 
-terraform 
-typescript 
-unit testing 
-unity 
-unix shell 
-vagrant 
-virtual 
-visual basic 
-visual studio 
-vpn 
-vue 
-web app 
-webdna 
-x86 
-xml 
-xquery 
+.js
+.net
+algol
+ams
+android
+android studio
+angular
+ansible
+api
+applescript
+assembly language
+atomation
+autohotkey
+aws
+azure
+back-end
+bash
+basic
+batch
+bitbucket
+blockchain
+brew
+c
+c#
+c+
+cloud
+cobol
+component pascal
+css
+css3
+curl
+dart
+database
+dbase
+delphi
+django
+docker
+ecmascript
+excel
+fastapi
+ffp
+fireship
+flask
+flutter
+fortran
+framework
+front-end
+ftp
+full stack
+g-code
+git
+github
+gitlab
+gnu
+go
+go!
+google
+google cloud
+hack
+hacking
+high level assembly
+html
+html5
+ibm basic assembly language
+j
+java
+javascript
+jquery
+kotlin
+ksh
+laravel
+laurea
+linux
+lua
+mac os
+machine code
+magento
+microcode
+microsoft
+mongodb
+native
+node
+npl
+office
+oop
+opencl
+pascal
+pearl
+perl
+php
+powershell
+python
+rails
+react
+ruby
+runescript
+rust
+scala
+scilab
+scratch
+sequel
+server
+sql
+ssh
+swift
+sysadmin
+terraform
+typescript
+unit testing
+unity
+unix shell
+vagrant
+virtual
+visual basic
+visual studio
+vpn
+vue
+web app
+webdna
+x86
+xml
+xquery

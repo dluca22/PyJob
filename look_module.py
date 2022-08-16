@@ -14,43 +14,43 @@ agent = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36
 
 
 
-def main():
+# def main():
 
-    start_time = time.time()
-    dev_mode = False # False DEFAULT VAL
-    searched_ids = set()
-    chart = False
+#     start_time = time.time()
+#     dev_mode = False # False DEFAULT VAL
+#     searched_ids = set()
+#     chart = False
 
-       # creates a lists from function
-    jobList = extract_from_page(place, job_search, page=0)
+#        # creates a lists from function
+#     jobList = extract_from_page(place, job_search, page=0)
 
-    # for every element of the list open the job page and extract the description as lowercase text
-    for j in jobList:
-        # if the job 'id' is not in the set of already searched
-        if j['id'] not in searched_ids:
-            # add it to the set
-            searched_ids.add(j['id'])
-            # pull the listing for the offer
-            page_object = pull_listing_data('http://it.indeed.com' + j['job_link'])
-            try:
-                description = get_description(page_object)
-            except AttributeError:
-                sys.exit("Service on Indeed temporarily unavailable")
-            # for every job page that has not yet been analized
-            #  call analisis to do string match
-            analisis(description)
+#     # for every element of the list open the job page and extract the description as lowercase text
+#     for j in jobList:
+#         # if the job 'id' is not in the set of already searched
+#         if j['id'] not in searched_ids:
+#             # add it to the set
+#             searched_ids.add(j['id'])
+#             # pull the listing for the offer
+#             page_object = pull_listing_data('http://it.indeed.com' + j['job_link'])
+#             try:
+#                 description = get_description(page_object)
+#             except AttributeError:
+#                 sys.exit("Service on Indeed temporarily unavailable")
+#             # for every job page that has not yet been analized
+#             #  call analisis to do string match
+#             analisis(description)
 
-    # dev_mode trigger
-    if dev_mode == True:
-        timing = time.time() - start_time
-        print_to_file(dev_mode, timing, searched_ids, jobList, job_search, place)
-    elif chart == True:
-        pie_chart()
-    else:
-        #if no dev_mode, function has default parameters
-        print_to_file(ids=searched_ids)
+#     # dev_mode trigger
+#     if dev_mode == True:
+#         timing = time.time() - start_time
+#         print_to_file(dev_mode, timing, searched_ids, jobList, job_search, place)
+#     elif chart == True:
+#         pie_chart()
+#     else:
+#         #if no dev_mode, function has default parameters
+#         print_to_file(ids=searched_ids)
 
-# end of main()
+# # end of main()
 # ===========================================================
 
 

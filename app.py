@@ -1,7 +1,7 @@
 from crypt import methods
 from distutils.log import debug
 import time
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, flash
 from look_module import extract_from_page, pull_listing_data, get_description
 from analize_module import analisis, percent_calc, sort_dictionary
 import sys
@@ -10,23 +10,28 @@ import logging
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
-dict_from_text = {}
-searched_ids = set()
-
+default_dict = {}
+# ????  searched_ids = set()
 
 
 @app.route("/")
-@app.route("/home")
 @app.route("/index")
 def index():
-    global dict_from_text
+    global default_dict
+    default_dict = build_dict()
+
+
+    return render_template("index.html", dict=default_dict)
+
+
+def build_dict():
+    default_dict = {}
 
     with open("list_of_keys.txt", "r") as file:
         for line in file:
-            dict_from_text[line.strip()] = 0
+            default_dict[line.strip()] = 0
 
-
-    return render_template("index.html", dict=dict_from_text)
+    return default_dict
 
 @app.route("/search", methods=['GET', 'POST'])
 def start_search():
@@ -38,6 +43,10 @@ def start_search():
         dev_mode = False # False DEFAULT VAL
         searched_ids = set()
         chart = False
+        global default_dict
+
+        # test to call function
+        add_keywords()
 
         # get values from request form
         place = request.form['place']
@@ -63,14 +72,17 @@ def start_search():
 
                 # for every job page that has not yet been analized
                 #  call analisis to do string match
-                ordered_result= percent_calc(sort_dictionary(analisis(description)))
+                # with open("list_of_keys.txt", "r") as file:
+                #     for line in file:
+                #         default_dict[line.strip()] = 0
+                ordered_result= sort_dictionary(analisis(description, default_dict))
 
 
         # instead of passing various arguments,  put them in a dict and pass that to render templates as an **unpacked_dict
 
         time.sleep(10)
 
-        return render_template("result.html", place=place, job=job, dict=dict_from_text, result_dict=ordered_result, jobList=jobList)
+        return render_template("result.html", place=place, job=job, dict=default_dict, result_dict=ordered_result, jobList=jobList)
     else:
         return error("There was an error on line 55 else > method !=post")
 
@@ -80,21 +92,30 @@ def error(error):
     return render_template("error_page.html", error=error)
 
 
-# @app.route("/test")
-# def test():
+# @app.route("/add_keywords", methods=["POST"])
+# def add_keywords():
 
-#     return render_template("test.html", visibility="hidden")
+#     if request.method == "POST":
+#         global default_dict
 
-# IDEA per dopo
-# def user_added_keys():
-            # possiamo creare un dictionary da una list che chiediamo all'user, popolare la list
-    # user_input = ["JINJA2", "COBOL", "POSTGRES", "FLAKS"]
-            # e con questo metodo creare keys:values con pre-defined value
-    # user_custom_dict = dict.fromkeys(user_input, 0)
+#         # new_keyword = request.get["keyword"]  ???
+#         # what user adds
+#         new_keywords = ["AAAAAA", "BBBBB", "c"]
+
+#         for key in new_keywords:
+#             if key not in default_dict:
+#                 default_dict[key] = 0
+
+#         flash("Your keywords were added!")
+#         return index()
+#         # return redirect(url_for("/"))
+#         # oppure
+        # return redirect("/")
 
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
+
 
     # TEMP - reload every secondss
     while True:
