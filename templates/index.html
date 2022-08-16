@@ -18,63 +18,88 @@
 
     </div>
 </div>
-<div class="container-sm my-2-px-4">
-    <!-- form di input con le due inpot box e pulsante -->
-    <!-- <form action="/search" method="post">
-        # inputText di PLACE
-        <div class="row g-0 justify-content-center align-items-start">
-            <div class="col-4">
-                <input class="form-control rounded-0 rounded-start" type="text" placeholder="City" aria-label="place" name="place" required>
-            </div>
-            <div class="col-4">
-                 # inputText di JOB
-                <input class="form-control rounded-0 rounded-end" type="text" placeholder="Job to search" name="job_search" required>
-            </div>
-            <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
-        </div> -->
-    <!-- temporary radius prechecked values -->
-    <form action="/search" method="post">
-        <div class="row g-0 justify-content-center align-items-start">
-            <div class="col-4">
-                <input type="radio" name="place" value="milano" checked="checked"> <span
-                    class="default-input">Milano</span>
-            </div>
-            <div class="col-4">
-                <input type="radio" name="job_search" value="pentester" checked="checked"> <span
-                    class="default-input">pentester</span>
-            </div>
-            <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
+
+<div class="main-section container text-center">
+    <div class="row align-items-center">
+
+        <div class="container-sm my-2-px-4">
+            <!-- form di input con le due inpot box e pulsante -->
+            <!-- <form action="/search" method="post">
+                # inputText di PLACE
+                <div class="row g-0 justify-content-center align-items-start">
+                    <div class="col-4">
+                        <input class="form-control rounded-0 rounded-start" type="text" placeholder="City" aria-label="place" name="place" required>
+                    </div>
+                    <div class="col-4">
+                         # inputText di JOB
+                        <input class="form-control rounded-0 rounded-end" type="text" placeholder="Job to search" name="job_search" required>
+                    </div>
+                    <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
+                </div> -->
+            <!-- temporary radius prechecked values -->
+            <form action="/search" method="post">
+                <div class="row g-0 justify-content-center align-items-start">
+                    <div class="col-4">
+                        <input type="radio" name="place" value="milano" checked="checked"> <span
+                            class="default-input">Milano</span>
+                    </div>
+                    <div class="col-4">
+                        <input type="radio" name="job_search" value="pentester" checked="checked"> <span
+                            class="default-input">pentester</span>
+                    </div>
+                    <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
+                </div>
+
+            </form>
+
+
         </div>
 
-    </form>
+        <div class="container-sm my-1-px-2">
+            <div class="row g-0 justify-content-center">
 
+                <div class="col-4">
+                    <div class="search-result rounded-3">
 
-</div>
+                            {% block result%}
 
-    <div class="main-section container text-center">
-        <div class="row align-items-start">
+                            {%endblock%}
 
+                    </div>
+                </div>
 
-            <div class="col">
-                <div class="results rounded-3">
+                <div class="col-8">
+                    <p style="color:greenyellow">graph</p>
+                    {%block image%}
+
+                    {%endblock%}
+                </div>
+            </div>
+        </div>
+
+        <!-- sezione a scomparsa -->
+        <div>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseSection" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
+                Keywords in use
+            </a>
+        </div>
+        <div class="collapse" id="collapseSection">
+
+            <div class="container-sm my-2-px-4">
+                <div class="keywords-in-use rounded-3">
+                    <!-- list of keywords in use -->
                     <ul>
                         {% for k, v in dict.items()%}
-                        <li style="list-style: none ;"><b>{{k}}</b></li>
+                        <li style="list-style: none ; display: inline;"><b>&emsp;{{k}} &emsp;| </b></li>
                         {%endfor%}
                     </ul>
                 </div>
             </div>
-            <div class="col">
-                <div class="info rounded-3">
-                    <ul>
-                        {% block result%}
-
-                        {%endblock%}
-                    </ul>
-                </div>
-            </div>
-
-
         </div>
+    </div>
 
-        {%endblock%}
+
+</div>
+
+{%endblock%}

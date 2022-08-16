@@ -18,10 +18,10 @@ h2 {
     color: #2a9d8f;
 }
 
-.results {
+.keywords-in-use {
     background-color: yellow;
 }
-.info {
+.search-result {
     background-color: #e76f51;
 }
 .rounded-3 {

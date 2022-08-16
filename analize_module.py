@@ -1,7 +1,10 @@
+from fileinput import filename
 import re
 import sys
+import time
 # from dictionary import languages
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+from flask import url_for
 
 
 # gets data from main program and analize the text
@@ -42,40 +45,40 @@ def analisis(text, default_dict):
                     result_dict[k] += v
                 # else creates a new k:v pair
                 result_dict.update({k : v})
-    return result_dict
+
             # fine analize()
 # ===========================================================
 
-def print_to_file(dev_mode=False, timing=0, ids=None, jobList=None, url=None, job_search=None, place=None):
+def elaborate():
     # calls the 2 functions that order and transform the dict to a more readable format
-    with open('results.txt', 'w') as output:
-        elaborated = percent_calc(sort_dictionary(result_dict))
-        # sys.exit(list(elaborated.values()))
+    global result_dict
+    global counter
 
-        # pretty format header of the output file
-        output.write(f'Skill = Nr. of matches (% of relevance) \n')
-        output.write(f'Total keywords matching: {counter} in {len(ids)} unique offers \n \n')
+    elaborated = percent_calc(sort_dictionary(result_dict))
+    # sys.exit(list(elaborated.values()))
+    finish_time = time.time()
+    # pretty format header of the output file
+    # output.write(f'Skill = Nr. of matches (% of relevance) \n')
+    # output.write(f'Total keywords matching: {counter} in {len(ids)} unique offers \n \n')
 
-        # in dev_mode print matches and time taken (add num of pages and maybe links to every job offer)
-        # writes the counter of ALL matches, the total of unique offers searched (set of ids)
-        if dev_mode ==True:
-            output.write(f'<Time: {round(timing, 2)}s > \n')
-            output.write('(other useless things for dev_mode) \n \n')
+    # # in dev_mode print matches and time taken (add num of pages and maybe links to every job offer)
+    # # writes the counter of ALL matches, the total of unique offers searched (set of ids)
+    # if dev_mode ==True:
+    #     output.write(f'<Time: {round(timing, 2)}s > \n')
+    #     output.write('(other useless things for dev_mode) \n \n')
 
-        # for every key and value of the dict > write a line to the output file
-        for k, v in elaborated.items():
-                output.write(f"{k.capitalize()} =   {result_dict[k]} ({v} %)\n")
+    # # for every key and value of the dict > write a line to the output file
+
+    # REMOVE
+    # for k, v in elaborated.items():
+    #         output.write(f"{k.capitalize()} =   {result_dict[k]} ({v} %)\n")
+    pie_chart(elaborated)
+
+    return elaborated, finish_time, counter
 
 
 # print to file every checked job title and job link (but it's kinda useless for what i need)
-        if dev_mode == True:
-            output.write(f'\n \n URL = {url} \n')
-            output.write(f'Place = {place} \n')
-            output.write(f'Job = {job_search} \n \n')
-            for item in jobList:
-                if item['id'] in ids:
-                    output.write(f"id = {item['id']},\nTitle = {item['title']},\nCompany = {item['company']} \n")
-                    output.write('============================================== \n \n')
+
 
 # ===========================================================
 
@@ -106,11 +109,11 @@ def sort_dictionary(unsorted_dict):
 
 # ===========================================================
 
-def pie_chart():
-    elaborated = percent_calc(sort_dictionary(result_dict))
+def pie_chart(dictionary):
+
     # Pie chart, where the slices will be ordered and plotted counter-clockwise:
-    labels = list(elaborated.keys())
-    sizes = list(elaborated.values())
+    labels = list(dictionary.keys())
+    sizes = list(dictionary.values())
 
     # starting list for exploded view
     # should contain a value for each value to plot, else ValueError
@@ -126,4 +129,4 @@ def pie_chart():
             shadow=True, startangle=0)
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
-    plt.show()
+    plt.savefig('./static/graph.png')

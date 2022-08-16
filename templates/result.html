@@ -4,13 +4,23 @@
 
 <button ><a href="/index">Go back</a></button>
 
-<h3>{{place.upper()}}</h3>
-<h3>{{job.upper()}}</h3>
-
+<h5>{{place.upper()}}</h5>
+<h5>{{job.upper()}}</h5>
+<p class="query_log">It took {{timing}} seconds, we found {{counter}} matches!</p>
+<hr>
 {% for k, v in result_dict.items()%}
-<li style="list-style: none ;"><b>{{k}}</b>   <b>{{v}}</b></li>
+<ul>
+    <li style="list-style: none ;"><b>{{k}}:</b>&emsp; <em>{{v}} %</em></li>
+</ul>
 {%endfor%}
-
-
-
 {% endblock %}
+
+{%block image%}
+
+<img src="/static/graph.png" alt="graph">
+
+
+
+
+
+{%endblock%}

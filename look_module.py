@@ -1,9 +1,10 @@
-from analize_module import analisis, print_to_file, pie_chart
+from analize_module import analisis, elaborate, pie_chart
 from bs4 import BeautifulSoup
 import requests
 import re
 import sys
 import time
+import app
 
 # this one gets user input and scrapes the website for job offers
 # then sends to the helper function the description to analize and store relevant data
@@ -11,6 +12,36 @@ agent = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 
 # ===========================================================
+
+def search(place, job_search, default_dict, user_dict=None, page=0):
+    # empty set
+    searched_ids = set()
+
+    jobList = extract_from_page(place=place, job_search=job_search)
+
+    # se il job id non è nella lista, pull description dal suo link
+    for j in jobList:
+        if j['id'] not in searched_ids:
+            # add it to the set
+            searched_ids.add(j['id'])
+            # pull the listing for the offer
+            page_object = pull_listing_data('http://it.indeed.com' + j['job_link'])
+            try:
+                description = get_description(page_object)
+
+            except AttributeError:
+                return app.error("Service on Indeed is temporarily unavailable")
+
+
+            # for every job page that has not yet been analized
+            #  call analisis to do string match
+
+            analisis(description, default_dict)
+    
+    elaborate()
+
+
+
 
 
 
