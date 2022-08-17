@@ -1,14 +1,13 @@
-from crypt import methods
-from distutils.log import debug
-from glob import glob
-import time
-from flask import Flask, render_template, request, redirect, url_for, flash
-import look_module
-from analize_module import analisis, elaborate, percent_calc, sort_dictionary
-import sys
 import logging
+import time
+from flask import Flask, render_template, request, redirect, flash, url_for
+from look_module import format_entry, search
+from analize_module import elaborate
+
 
 app = Flask(__name__)
+app.secret_key = '01101100'
+
 logging.basicConfig(level=logging.DEBUG)
 
 default_dict = {}
@@ -19,15 +18,39 @@ user_dict = {}
 
 
 @app.route("/")
+@app.route("/add_keywords", methods=["POST"])
 @app.route("/index")
 def index():
+
     global default_dict
     global user_dict
 
-    default_dict = build_dict()
+    if request.method == "GET":
+        default_dict = build_dict()
+    elif request.method == "POST":
 
 
-    return render_template("index.html", dict=default_dict)
+        # new_keyword = request.get["keyword"]  ???
+        # what user adds
+        new_keywords = ["AAAAAA", "BBBBB", "c"]
+        if len(new_keywords) != 0:
+            for key in new_keywords:
+                if key not in default_dict:
+                    user_dict[key] = 0
+
+            flash("Your keywords were added!")
+            # return index()
+            # return redirect(url_for("/"))
+            # oppure
+            return redirect("/index")
+        else:
+            flash("No additions.")
+            return redirect("/index")
+
+
+
+
+    return render_template("index.html", dict=default_dict, user_dict=user_dict)
 
 # =============================================================
 def build_dict():
@@ -64,11 +87,11 @@ def start_search():
         # add_keywords()
 
         # get values from request form
-        place = request.form['place']
-        job = request.form['job_search']
+        place = format_entry(request.form['place'])
+        job = format_entry(request.form['job_search'])
 
         ordered_result = {}
-        ordered_result = look_module.search(place=place, job_search=job, default_dict=default_dict)
+        ordered_result = search(place=place, job_search=job, default_dict=default_dict)
         # chiama funzione e ritorna lista (page e logica è definito dentro la funzione )
         # jobList = extract_from_page(place = place, job_search = job)
 
@@ -92,29 +115,29 @@ def error(error):
 
 
 
-@app.route("/add_keywords", methods=["POST"])
-def add_keywords():
-    global user_dict
-    if request.method == "POST":
-        global default_dict
+# @app.route("/add_keywords", methods=["POST"])
+# def add_keywords():
+#     global user_dict
+#     if request.method == "POST":
+#         global default_dict
 
-        # new_keyword = request.get["keyword"]  ???
-        # what user adds
-        new_keywords = ["AAAAAA", "BBBBB", "c"]
+#         # new_keyword = request.get["keyword"]  ???
+#         # what user adds
+#         new_keywords = ["AAAAAA", "BBBBB", "c"]
 
-        for key in new_keywords:
-            if key not in default_dict:
-                default_dict[key] = 0
+#         for key in new_keywords:
+#             if key not in default_dict:
+#                 default_dict[key] = 0
 
-        flash("Your keywords were added!")
-        # return index()
-        # return redirect(url_for("/"))
-        # oppure
-        return redirect("/")
-    else:
-        return user_dict
+#         flash("Your keywords were added!")
+#         # return index()
+#         # return redirect(url_for("/"))
+#         # oppure
+#         return redirect(url_for('index'), method="POST")
+#     else:
+#         return user_dict
 
-# =============================================================
+# # =============================================================
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)

@@ -46,7 +46,7 @@ def format_entry(entry):
     # strip trailing whitespaces
     formatted = re.sub(r"\s+", '+', entry.strip())
 
-    return formatted
+    return formatted.lower()
 
 # ===========================================================
 

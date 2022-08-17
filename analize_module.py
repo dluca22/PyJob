@@ -42,11 +42,11 @@ def elaborate():
     global result_dict
     global counter
 
-    elaborated = percent_calc(sort_dictionary(result_dict))
+    elaborated = add_percent(sort_dictionary(result_dict))
 
     finish_time = time.time()
 
-    pie_chart(elaborated)
+    pie_chart(result_dict)
 
     return elaborated, finish_time, counter
 
@@ -54,6 +54,17 @@ def elaborate():
 # ===========================================================
 
     # from int values intrasforms to percent float w/ 2 decimal place
+def add_percent(dictionary):
+    total = sum(dictionary.values())
+    for k, v in dictionary.items():
+        # updates dict with same Key but a Value x 100 divided by total of sum of dict values
+        # dictionary.setdefault(k, []).append(float("{:.2f}".format(v *100 / total )))
+        dictionary.update({k : [v, float("{:.2f}".format(v *100 / total ))]})
+        # only add percent sign to the file writing so it is still a computable number for later use
+    return dictionary
+# # ===========================================================
+
+#     # from int values intrasforms to percent float w/ 2 decimal place
 def percent_calc(dictionary):
     total = sum(dictionary.values())
     for k, v in dictionary.items():
@@ -82,13 +93,14 @@ def sort_dictionary(unsorted_dict):
 
 def pie_chart(dictionary):
 
+    result = percent_calc(sort_dictionary(dictionary))
     # Pie chart, where the slices will be ordered and plotted counter-clockwise:
-    labels = list(dictionary.keys())
-    sizes = list(dictionary.values())
+    labels = list(result.keys())
+    sizes = list(result.values())
 
     # starting list for exploded view
     # should contain a value for each value to plot, else ValueError
-    explode = [0.1]
+    explode = [0.2]
     # dinamically append other values to match the len of values to display
     for _ in range(1, len(sizes)):
         explode.append(0)
@@ -97,7 +109,7 @@ def pie_chart(dictionary):
     fig1, ax1 = plt.subplots()
 
     ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-            shadow=True, startangle=0)
+            shadow=True, startangle=90)
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
     plt.savefig('./static/graph.png')
