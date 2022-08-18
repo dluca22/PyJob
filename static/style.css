@@ -2,20 +2,15 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #4b4b4e !important;
+
 }
 div{
     align-items: center;
 }
-h1 {
-    color: #e76f51 !important;
-    text-decoration-line: none;
-}
-h2 {
-    color: #f4a261
-}
-.presentation {
-    color: #2a9d8f;
+h1, h3, .presentation {
+    color: white !important;
+
+   color: #2a9d8f;
 }
 
 .keywords-in-use {
@@ -31,4 +26,19 @@ h2 {
 .default-input {
     font-weight: bolder;
     color:aliceblue
+}
+
+#search-col{
+    background-color: lightblue;
+}
+#keyword-col{
+    background-color: lightcyan;
+}
+div.border.border-primary{
+    border-radius: 20px;
+}
+.verticalLine{
+    border-left: 2px solid #0D6EFD ;
+    height: 15px;
+
 }

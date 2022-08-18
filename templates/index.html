@@ -3,103 +3,152 @@
 {%block title%} index {%endblock%}
 
 {%block body%}
-<div class="container-sm my-5 ">
-    <div class="header">
-        <h1><a href="/">Hello</a></h1>
-        <h2>Welcome to Skill Rank!</h2>
+<section id="presentation" class="container-fluid bg-primary">
+    <div class="container-sm my-2">
+        <div class="header">
+            <h1>Hello!</h1>
+            <h3>Welcome to DevSkills!</h3>
+        </div>
+        <div class="presentation">
+            <p>This web-app will return, based on your job search and desired location, a list of the most required
+                skills
+                that
+                employers are looking for!</p>
+            <p>Just enter the job you're looking for and your desired location, and you'll be served and updated list of
+                skills
+                that are being required the most!</p>
+
+        </div>
     </div>
-    <div class="presentation">
-        <p>This web-app will return, based on your job search and desired location, a list of the most required skills
-            that
-            employers are looking for!</p>
-        <p>Just enter the job you're looking for and your desired location, and you'll be served and updated list of
-            skills
-            that are being required the most!</p>
+</section>
+<!-- sezione 2 -->
 
-    </div>
-</div>
 
-<div class="main-section container text-center">
-    <div class="row align-items-center">
+<div class="main-section container mt-5 min-vh-100">
 
-        <div class="container-sm my-2-px-4">
+    <div class="row d-flex align-items-start">
+        <div class="col-4 border border-primary" id="search-col">
+
+
             <!-- form di input con le due inpot box e pulsante -->
             <!-- <form action="/search" method="post">
-                # inputText di PLACE
-                <div class="row g-2 justify-content-center align-items-start">
-                    <div class="col-4">
-                        <input class="form-control rounded-0 rounded-start" type="text" placeholder="City" aria-label="place" name="place" required>
-                    </div>
-                    <div class="col-4">
-                         # inputText di JOB
-                        <input class="form-control rounded-0 rounded-end" type="text" placeholder="Job to search" name="job_search" required>
-                    </div>
-                    <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
-                </div> -->
+                            # inputText di PLACE
+                            <div class="row g-2 justify-content-center align-items-start">
+                                <div class="col-4">
+                                    <input class="form-control rounded-0 rounded-start" type="text" placeholder="City" aria-label="place" name="place" required>
+                                </div>
+                                <div class="col-4">
+                                     # inputText di JOB
+                                    <input class="form-control rounded-0 rounded-end" type="text" placeholder="Job to search" name="job_search" required>
+                                </div>
+                                <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
+                            </div> -->
             <!-- temporary radius prechecked values -->
             <form action="/search" method="post">
-                <div class="row g-2 justify-content-center align-items-start">
+                <div class="row g-2 justify-content-center align-items-center">
                     <div class="col-4">
-                        <input type="radio" name="place" value="milano" checked="checked"> <span
+                        <input type="radio" name="place" value="milano" checked="checked"><span
                             class="default-input">Milano</span>
                     </div>
+                </div>
+                <div class="row g-2 justify-content-center align-items-center">
                     <div class="col-4">
                         <input type="radio" name="job_search" value="junior developer" checked="checked"> <span
                             class="default-input">junior developer</span>
                     </div>
-                    <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
                 </div>
+                <div class="row d-grid col-5 mx-auto mt-2">
+                    <input class="btn btn-primary " type="submit" value="Submit">
+                </div>
+
+                <hr>
+
+                <div class="row ">
+                    <p>Other options:</p>
+                </div>
+
+                <div class="row">
+                    <ul>
+                        <li>pages: &emsp;
+                            <select name="page">
+                                <option value="1">1</option>
+                                {%for i in range(2,6)%}
+                                <option value="{{i}}">{{i}}</option>{%endfor%}
+                            </select>
+
+                        </li>
+
+                        <li>Country:
+                            <input type="radio" name="country" value="ita" checked="checked">
+                            <span class="default-input">ITA</span>
+
+                            <span class="verticalLine"></span>
+
+                            <input type="radio" name="country" value="usa">
+                            <span class="default-input">USA</span>
+                        </li>
+                    </ul>
+
 
             </form>
-
-
         </div>
 
-        <!-- sezione a scomparsa -->
-        <div>
-            <a class="btn btn-primary my-3" data-bs-toggle="collapse" href="#collapseSection" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
-                Keywords in use
-            </a>
-        </div>
-        <div class="collapse" id="collapseSection">
 
-            <div class="container-sm my-3-px-2">
-                <div class="keywords-in-use rounded-3">
-                    <!-- form per inserire proprio input -->
-                    <form action="/add_keywords" method="post">
+    </div>
 
-                        <div class="row g-2 justify-content-center align-items-start">
-                            <div class="col-8">
-                                <input class="form-control start" type="text"
-                                    placeholder="Insert,your,keywords,separated,by,commas" aria-label="custom_keys"
-                                    name="custom_keys" required>
-                            </div>
-                            <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit"
-                                    value="Add Keywords">
-                            </div>
-                        </div>
+    <!-- sezione a scomparsa -->
+    <div class="col-8 d-flex justify-content-center border border-primary" id="keyword-col">
+        <div class="container">
 
-                        <!-- list of keywords in use -->
-                        <ul>
-                            {%if user_dict|length > 0%}
-                                {% for w, n in user_dict.items()%}
-                                <li style="list-style: none ; color:blueviolet; display: inline;"><b>{{w}} , &emsp; </b></li>
-                                {%endfor%}
-                            {%endif%}
-                        </ul>
-                        <ul>
-                            {% for k, v in dict.items()%}
+            <div class="row">
+                <div class="row d-grid gap-2 col-4 mx-auto">
 
-                            <li style="list-style: none ; display: inline;"><b>{{k}} , &emsp; </b></li>
-                            {%endfor%}
-                        </ul>
+                    <a class="btn btn-primary my-3" data-bs-toggle="collapse" href="#collapseSection" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Keywords in use
+                    </a>
                 </div>
             </div>
+            <div class="row">
+                <div class="collapse" id="collapseSection">
+                    <div class="container-sm my-3-px-2">
+                        <div class="keywords-in-use rounded-3">
+                            <!-- form per inserire proprio input -->
+                            <form action="/add_keywords" method="post">
+                                <div class="row g-2 justify-content-center align-items-start">
+                                    <div class="col-8">
+                                        <input class="form-control start" type="text"
+                                            placeholder="Insert,your,keywords,separated,by,commas"
+                                            aria-label="custom_keys" name="custom_keys" required>
+                                    </div>
+                                    <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit"
+                                            value="Add Keywords">
+                                    </div>
+                                </div>
+                                <!-- list of keywords in use -->
+                                <ul>
+                                    {%if user_dict|length > 0%}
+                                    {% for w, n in user_dict.items()%}
+                                    <li style="list-style: none ; color:blueviolet; display: inline;"><b>{{w}} ,
+                                            &emsp; </b>
+                                    </li>
+                                    {%endfor%}
+                                    {%endif%}
+                                </ul>
+                                <ul>
+                                    {% for k, v in dict.items()%}
+                                    <li style="list-style: none ; display: inline;"><b>{{k}} , &emsp; </b></li>
+                                    {%endfor%}
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-
 </div>
 
+</div>
 {%endblock%}

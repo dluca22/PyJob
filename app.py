@@ -1,12 +1,13 @@
 import logging
 import time
 from flask import Flask, render_template, request, redirect, flash, url_for
-from look_module import format_entry, search
+from look_module import build_dict, format_entry, search
 from analize_module import elaborate
 
 
 app = Flask(__name__)
 app.secret_key = '01101100'
+app.config['PROPAGATE_EXCEPTIONS'] = True
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -22,13 +23,14 @@ user_dict = {}
 @app.route("/index")
 def index():
 
-    global default_dict
-    global user_dict
 
+
+    # method get se viene chiamata la pagina da <back> o logo pagina
     if request.method == "GET":
+        # la chiama da look_module
         default_dict = build_dict()
-    elif request.method == "POST":
 
+    elif request.method == "POST":
 
         # new_keyword = request.get["keyword"]  ???
         # what user adds
@@ -53,19 +55,18 @@ def index():
     return render_template("index.html", dict=default_dict, user_dict=user_dict)
 
 # =============================================================
-def build_dict():
-    global default_dict
-    default_dict = {}
+# def build_dict():
+#     global default_dict
+#     default_dict = {}
 
-    with open("list_of_keys.txt", "r") as file:
-        for line in file:
-            default_dict[line.strip()] = 0
+#     with open("list_of_keys.txt", "r") as file:
+#         for line in file:
+#             default_dict[line.strip()] = 0
 
-    return default_dict
+#     return default_dict
 
 
 # =============================================================
-
 
 
 @app.route("/search", methods=['GET', 'POST'])
@@ -76,12 +77,10 @@ def start_search():
         # setting variables
         dev_mode = False # False DEFAULT VAL
 
+
         start_time = time.time()
-        searched_ids = set()
-        chart = False
-        global default_dict
+        # REMOVE global default_dict
         global user_dict
-        build_dict()
 
         # test to call function
         # add_keywords()
@@ -89,16 +88,26 @@ def start_search():
         # get values from request form
         place = format_entry(request.form['place'])
         job = format_entry(request.form['job_search'])
+        country = request.form['country']
 
-        ordered_result = {}
-        ordered_result = search(place=place, job_search=job, default_dict=default_dict)
-        # chiama funzione e ritorna lista (page e logica è definito dentro la funzione )
-        # jobList = extract_from_page(place = place, job_search = job)
+        # page 1 returns value 0 that extract_from_page uses to display
+        # works even if not converted to int() ?!?
+        page = request.form['page']
+
+        # una scelta country chiama la funzione in look_module e crea dizionario
+        if country == "usa":
+            # search_usa()
+            pass
+        elif country == "ita":
+            ordered_result = search(place=place, job_search=job, page=page)
+
+
+
 
         ordered_result, finish_time, counter = elaborate()
 
         timing = round((finish_time - start_time),2)
-        return render_template("result.html", place=place, job=job, dict=default_dict, result_dict=ordered_result,timing=timing, counter=counter)
+        return render_template("result.html", place=place, job=job, dict=default_dict, result_dict=ordered_result,timing=timing, counter=counter, pageX=page, countryX=country)
     else:
         return error("There was an error on line 55 else > method !=post")
 
@@ -121,7 +130,7 @@ def error(error):
 #     if request.method == "POST":
 #         global default_dict
 
-#         # new_keyword = request.get["keyword"]  ???
+#         # new_keyword = request.get"/GETLIST/in teoria["keyword"]  ???
 #         # what user adds
 #         new_keywords = ["AAAAAA", "BBBBB", "c"]
 

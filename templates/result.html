@@ -2,21 +2,36 @@
 
 {%block body%}
 
-<button ><a href="/index">Go back</a></button>
+<div class="container mt-4">
 
-<h5>{{place.upper()}}</h5>
-<h5>{{job.upper()}}</h5>
-<p class="query_log">It took {{timing}} seconds, we found {{counter}} matches!</p>
-<hr>
-{% for k, v in result_dict.items()%}
-<ul>
-    <li style="list-style: none ;"><b>{{k}}:</b>&emsp; {{v[0]}} <em>({{v[1]}} %)</em></li>
-</ul>
-{%endfor%}
+    <div class="row">
+        <div class="col-8">
+            <h5>{{place.upper()}}</h5>
+            <h5>{{job.upper()}}</h5>
+            <h2>{{countryX}}</h2>
+            <h2>{{pageX}}</h2>
+            <p class="query_log">It took {{timing}} seconds, we found {{counter}} matches!</p>
+        </div>
+        <div class="col-4"><button><a href="/index">Go back</a></button></div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-8">
+            <img src="/static/graph.png" alt="graph" width=90%>
+        </div>
+        <div class="col-6 col-md-4 border-warning border-start">
+
+            <ul>
+                {% for k, v in result_dict.items()%}
+                <li style="list-style: none ;"><b>{{k}}:</b>&emsp; {{v[0]}} <em>({{v[1]}} %)</em></li>
+                {%endfor%}
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+
 {% endblock %}
-
-{%block image%}
-
-<img src="/static/graph.png" alt="graph">
-
-{%endblock%}

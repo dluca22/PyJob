@@ -9,11 +9,26 @@ import app
 agent = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 
+
+# ===========================================================
+def build_dict():
+
+    default_dict = {}
+
+    with open("list_of_keys.txt", "r") as file:
+        for line in file:
+            default_dict[line.strip()] = 0
+    return  default_dict
+
+
 # ===========================================================
 
-def search(place, job_search, default_dict, user_dict=None, page=0):
+def search(place, job_search, user_dict=None, page=0):
     # empty set
+
     searched_ids = set()
+
+    default_dict = build_dict()
 
     jobList = extract_from_page(place=place, job_search=job_search)
 
@@ -23,15 +38,16 @@ def search(place, job_search, default_dict, user_dict=None, page=0):
             # add it to the set
             searched_ids.add(j['id'])
             # pull the listing for the offer
-            page_object = pull_listing_data('http://it.indeed.com' + j['job_link'])
             try:
+                page_object = pull_listing_data('http://it.indeed.com' + j['job_link'])
                 description = get_description(page_object)
 
-            except AttributeError:
-                return app.error("Service on Indeed is temporarily unavailable")
+            except requests.exceptions.ConnectionAbortedError:
+                # chiama la funzione error importata da app
+                app.error("Service on Indeed is temporarily unavailable")
 
 
-            # for every job page that has not yet been analized
+            # for every job "id" page that has not yet been analized
             #  call analisis to do string match
 
             analisis(description, default_dict)
@@ -50,15 +66,18 @@ def format_entry(entry):
 
 # ===========================================================
 
-def extract_from_page(place, job_search, page=0):
+def extract_from_page(place, job_search, page=1):
     # empty job list to be filled with dicts
     jobList = []
-    if page == 0:
+    if page == 1:
+        # se si cerca pagina 1 il valore passato che accetta url è 0
         jobList = transform(extract(0, place, job_search))
             #if page argument given >1 , loop over and .extend the jobList adding all job dictionaries
-    elif page != 0:
-        # in range da page 0 a page +1(8)inclusive page) step 10
-        for p in range(0, page +1, 10):
+    elif page != 1:
+        # transform value *10 because url indeed uses 0, 10, 20, 30 to 40(=page 5)
+        page = page * 10
+
+        for p in range(1, page , 10):
             jobList.extend(transform(extract(p, place, job_search)))
     return jobList
 
