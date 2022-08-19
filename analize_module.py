@@ -1,4 +1,5 @@
 import re
+import app
 import time
 import matplotlib.pyplot as plt
 
@@ -18,7 +19,9 @@ def analisis(text, default_dict):
     # looping over keys in the dict, it assigns the number of times the str gets appended to matches[]
     for key in default_dict:
         #  \bWORD\b matches unique expression that is not part of another word
+        # error on c++
         matches = re.findall(rf'\b{key}\b', text)
+        # matches = re.findall(rf'\b{key}\b', text)
         # if it matches default creates a list with all occurences
         if len(matches) >= 1:
             # just counts EVERY matches found for dev_mode
@@ -94,22 +97,27 @@ def sort_dictionary(unsorted_dict):
 def pie_chart(dictionary):
 
     result = percent_calc(sort_dictionary(dictionary))
+
+    if not dictionary:
+        app.error("what the fuck")
+    else:
     # Pie chart, where the slices will be ordered and plotted counter-clockwise:
-    labels = list(result.keys())
-    sizes = list(result.values())
+        labels = list(result.keys())
+        sizes = list(result.values())
 
-    # starting list for exploded view
-    # should contain a value for each value to plot, else ValueError
-    explode = [0.2]
-    # dinamically append other values to match the len of values to display
-    for _ in range(1, len(sizes)):
-        explode.append(0)
+        # starting list for exploded view
+        # should contain a value for each value to plot, else ValueError
+        explode = [0.2]
+        # dinamically append other values to match the len of values to display
+        for _ in range(1, len(sizes)):
+            explode.append(0)
 
 
-    fig1, ax1 = plt.subplots()
+        fig1, ax1 = plt.subplots()
+        
+        ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+                    shadow=True, startangle=90)
+        ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
-    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-            shadow=True, startangle=90)
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-
-    plt.savefig('./static/graph.png')
+        # save image w/ transparent background in case of darkmode
+        plt.savefig('./static/img/graph.png', transparent=True)

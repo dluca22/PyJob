@@ -1,13 +1,14 @@
 import logging
+import sys
 import time
-from flask import Flask, render_template, request, redirect, flash, url_for
+from flask import Flask, render_template, request, redirect, flash
 from look_module import build_dict, format_entry, search
 from analize_module import elaborate
 
 
 app = Flask(__name__)
 app.secret_key = '01101100'
-app.config['PROPAGATE_EXCEPTIONS'] = True
+# app.config['PROPAGATE_EXCEPTIONS'] = True REMOVE??
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -55,18 +56,6 @@ def index():
     return render_template("index.html", dict=default_dict, user_dict=user_dict)
 
 # =============================================================
-# def build_dict():
-#     global default_dict
-#     default_dict = {}
-
-#     with open("list_of_keys.txt", "r") as file:
-#         for line in file:
-#             default_dict[line.strip()] = 0
-
-#     return default_dict
-
-
-# =============================================================
 
 
 @app.route("/search", methods=['GET', 'POST'])
@@ -95,13 +84,7 @@ def start_search():
         page = request.form['page']
 
         # una scelta country chiama la funzione in look_module e crea dizionario
-        if country == "usa":
-            # search_usa()
-            pass
-        elif country == "ita":
-            ordered_result = search(place=place, job_search=job, page=page)
-
-
+        ordered_result = search(country=country, place=place, job_search=job, page=page)
 
 
         ordered_result, finish_time, counter = elaborate()
@@ -111,8 +94,8 @@ def start_search():
     else:
         return error("There was an error on line 55 else > method !=post")
 
-# =============================================================
 
+# =============================================================
 
 
 @app.route("/error")

@@ -4,9 +4,10 @@ import requests
 import re
 import sys
 import app
+from flask import abort
 
 # then sends to the helper function the description to analize and store relevant data
-agent = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
+
 #  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 
 
@@ -23,14 +24,14 @@ def build_dict():
 
 # ===========================================================
 
-def search(place, job_search, user_dict=None, page=0):
+def search(country , place, job_search, user_dict=None, page=1):
     # empty set
 
     searched_ids = set()
 
     default_dict = build_dict()
 
-    jobList = extract_from_page(place=place, job_search=job_search)
+    jobList = extract_from_page(country=country, place=place, job_search=job_search)
 
     # se il job id non è nella lista, pull description dal suo link
     for j in jobList:
@@ -39,7 +40,7 @@ def search(place, job_search, user_dict=None, page=0):
             searched_ids.add(j['id'])
             # pull the listing for the offer
             try:
-                page_object = pull_listing_data('http://it.indeed.com' + j['job_link'])
+                page_object = pull_listing_data(f'http://{country}.indeed.com' + j['job_link'])
                 description = get_description(page_object)
 
             except requests.exceptions.ConnectionAbortedError:
@@ -66,30 +67,32 @@ def format_entry(entry):
 
 # ===========================================================
 
-def extract_from_page(place, job_search, page=1):
+def extract_from_page(country, place, job_search, page=1):
     # empty job list to be filled with dicts
     jobList = []
     if page == 1:
         # se si cerca pagina 1 il valore passato che accetta url è 0
-        jobList = transform(extract(0, place, job_search))
+        jobList = transform(extract(country=country, page=0, place=place, job_search=job_search))
             #if page argument given >1 , loop over and .extend the jobList adding all job dictionaries
     elif page != 1:
         # transform value *10 because url indeed uses 0, 10, 20, 30 to 40(=page 5)
         page = page * 10
 
         for p in range(1, page , 10):
-            jobList.extend(transform(extract(p, place, job_search)))
+            jobList.extend(transform(extract(country=country, page=p, place=place, job_search=job_search)))
+        if not jobList:
+            return app.error("something, something")
     return jobList
 
 # ===========================================================
 
 
 # returns the HTML of the page
-def extract(page, place, job_search):
+def extract(country, page, place, job_search):
     # global url
-
+    agent = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
     # page 1 starts at 0, then increments of 10
-    url = f'http://it.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
+    url = f'http://{country}.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
     # url_usa = f'https://www.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
 
     r = requests.get(url, headers=agent)
@@ -132,7 +135,8 @@ def transform(soup):
         }
         # every loop appends a dictionary to the list
         jobList.append(job)
-
+    if not jobList:
+        abort("400")
     return jobList
 
 # ===========================================================
@@ -140,7 +144,7 @@ def transform(soup):
 
 # extracts the DOM from every job link page
 def pull_listing_data(job_link):
-    global agent
+    agent = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
     r = requests.get(job_link, headers=agent)
 
     jobSoup = BeautifulSoup(r.content, 'html.parser')
