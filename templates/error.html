@@ -1,0 +1,29 @@
+{%extends "layout.html"%}
+
+{% block body %}
+
+
+<div class="container-fluid text-center">
+    <div class="container mt-5 mx-3">
+
+        <div class="row">
+            <h1 id="error">{{error}}</h1>
+        </div>
+        <div class="row mt-3 ">
+            <div class="col-10 col-lg-5 mt-3">
+                The request was either for the wrong conutry, or the city wasn't found
+
+            </div>
+            <!-- img hidden until lg then show block -->
+            <div class="col-md-7 d-none d-lg-block"><img src="/static/img/error_test.png" alt="error image"
+                    width="400px" height="400px"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row my-4">
+
+    <button type="button" class="btn btn-warning btn-lg"><a href="/index">Go back</a></button>
+</div>
+
+{% endblock %}

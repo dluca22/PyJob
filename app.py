@@ -24,18 +24,15 @@ user_dict = {}
 @app.route("/index")
 def index():
 
-
-
     # method get se viene chiamata la pagina da <back> o logo pagina
     if request.method == "GET":
         # la chiama da look_module
         default_dict = build_dict()
 
     elif request.method == "POST":
-
         # new_keyword = request.get["keyword"]  ???
         # what user adds
-        new_keywords = ["AAAAAA", "BBBBB", "c"]
+        new_keywords = ["AAAAAA", "BBBBB"]
         if len(new_keywords) != 0:
             for key in new_keywords:
                 if key not in default_dict:
@@ -78,21 +75,23 @@ def start_search():
         place = format_entry(request.form['place'])
         job = format_entry(request.form['job_search'])
         country = request.form['country']
-
         # page 1 returns value 0 that extract_from_page uses to display
         # works even if not converted to int() ?!?
         page = request.form['page']
 
-        # una scelta country chiama la funzione in look_module e crea dizionario
         ordered_result = search(country=country, place=place, job_search=job, page=page)
 
+        if ordered_result == "code 37":
+            return error("Your search was invalid")
 
         ordered_result, finish_time, counter = elaborate()
 
         timing = round((finish_time - start_time),2)
         return render_template("result.html", place=place, job=job, dict=default_dict, result_dict=ordered_result,timing=timing, counter=counter, pageX=page, countryX=country)
+
+    # if method 'get'
     else:
-        return error("There was an error on line 55 else > method !=post")
+        return error("There was an error on line 55 else > method != post")
 
 
 # =============================================================
@@ -100,8 +99,8 @@ def start_search():
 
 @app.route("/error")
 def error(error):
-
-    return render_template("error_page.html", error=error)
+    error = error.upper()
+    return render_template("error.html", error=error)
 
 # =============================================================
 

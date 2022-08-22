@@ -31,20 +31,27 @@
 
 
             <!-- form di input con le due inpot box e pulsante -->
-            <!-- <form action="/search" method="post">
-                            # inputText di PLACE
-                            <div class="row g-2 justify-content-center align-items-start">
-                                <div class="col-4">
-                                    <input class="form-control rounded-0 rounded-start" type="text" placeholder="City" aria-label="place" name="place" required>
-                                </div>
-                                <div class="col-4">
-                                     # inputText di JOB
-                                    <input class="form-control rounded-0 rounded-end" type="text" placeholder="Job to search" name="job_search" required>
-                                </div>
-                                <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit" value="Submit"></div>
-                            </div> -->
-            <!-- temporary radius prechecked values -->
             <form action="/search" method="post">
+                <!-- # inputText di PLACE -->
+                <div class="row g-2 justify-content-center align-items-start">
+                    <div class="col-10 mt-2">
+                        <div class="row">
+                            <input class="form-control rounded-0 rounded-top" type="text" placeholder="City"
+                                aria-label="place" name="place" required>
+                        </div>
+
+
+                        <!-- # inputText di JOB -->
+                        <div class="row">
+                            <input class="form-control rounded-0 rounded-bottom" type="text" placeholder="Job to search"
+                                name="job_search" required>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- inizio radius prechecked values -->
+                <!-- <form action="/search" method="post">
                 <div class="row g-2 justify-content-center align-items-center">
                     <div class="col-4">
                         <input type="radio" name="place" value="chicago" checked="checked"><span
@@ -56,8 +63,10 @@
                         <input type="radio" name="job_search" value="junior developer" checked="checked"> <span
                             class="default-input">junior developer</span>
                     </div>
-                </div>
-                <div class="row d-grid col-5 mx-auto mt-2">
+                </div> -->
+                <!-- fine radius -->
+
+                <div class="row col-5 mx-auto mt-2">
                     <input class="btn btn-primary " type="submit" value="Submit">
                 </div>
 
@@ -90,11 +99,12 @@
                     </ul>
 
 
+
             </form>
         </div>
-
-
     </div>
+
+
 
     <!-- sezione a scomparsa -->
     <div class="col-8 d-flex justify-content-center border border-primary" id="keyword-col">
@@ -150,5 +160,5 @@
 
 </div>
 
-</div>
+
 {%endblock%}

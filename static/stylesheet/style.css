@@ -2,7 +2,11 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    
+
+}
+
+#error {
+    color: blue !important;
 }
 div{
     align-items: center;
@@ -41,4 +45,8 @@ div.border.border-primary{
     border-left: 2px solid #0D6EFD ;
     height: 15px;
 
+}
+
+button > a {
+    color : white;
 }

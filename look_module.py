@@ -33,27 +33,31 @@ def search(country , place, job_search, user_dict=None, page=1):
 
     jobList = extract_from_page(country=country, place=place, job_search=job_search)
 
-    # se il job id non è nella lista, pull description dal suo link
-    for j in jobList:
-        if j['id'] not in searched_ids:
-            # add it to the set
-            searched_ids.add(j['id'])
-            # pull the listing for the offer
-            try:
-                page_object = pull_listing_data(f'http://{country}.indeed.com' + j['job_link'])
-                description = get_description(page_object)
+    if not jobList:
+        return "code 37" #invalid
 
-            except requests.exceptions.ConnectionAbortedError:
-                # chiama la funzione error importata da app
-                app.error("Service on Indeed is temporarily unavailable")
+    else:
+        # se il job id non è nella lista, pull description dal suo link
+        # try:
+        for j in jobList:
+            if j['id'] not in searched_ids:
+                # add it to the set
+                searched_ids.add(j['id'])
+                # pull the listing for the offer
+                page_soup = pull_listing_data(f'http://{country}.indeed.com' + j['job_link'])
+                # call func to get description from the soup
+                description = get_description(page_soup)
 
-
-            # for every job "id" page that has not yet been analized
-            #  call analisis to do string match
-
+            # for every job "id" page that has not yet been analized call analisis()
             analisis(description, default_dict)
 
-    elaborate()
+        # after parsing all, launch elaborate()
+        elaborate()
+        # except TypeError:
+                # app.error("messaggio except")
+
+
+
 
 # ===========================================================
 
@@ -80,9 +84,10 @@ def extract_from_page(country, place, job_search, page=1):
 
         for p in range(1, page , 10):
             jobList.extend(transform(extract(country=country, page=p, place=place, job_search=job_search)))
-        if not jobList:
-            return app.error("something, something")
-    return jobList
+    if not jobList:
+        return None
+    else:
+        return jobList
 
 # ===========================================================
 
@@ -96,13 +101,14 @@ def extract(country, page, place, job_search):
     # url_usa = f'https://www.indeed.com/jobs?q={job_search}&l={place}&start={page}&vjk=ab0f880e61368268'
 
     r = requests.get(url, headers=agent)
-    if r.status_code == 403:
-        sys.exit("Request returned <403>")
+    if r.status_code != 200:
+        sys.exit(f"Request returned <{r.status_code}>")
 
-    # returns the DOM object
-    soup = BeautifulSoup(r.content, 'html.parser')
+    else:
+        # returns the DOM object
+        soup = BeautifulSoup(r.content, 'html.parser')
 
-    return soup
+        return soup
 
 # ===========================================================
 
@@ -113,31 +119,33 @@ def transform(soup):
     # all the card divs
     divs = soup.find_all('div', class_='job_seen_beacon')
 
-    for item in divs:
+    if not divs:
+        return None
+    else:
+        for item in divs:
 
-        # as of now only job_link is relevant, other elements can be integrated later for added functionalities
-        # job title is in the <a> tag as text
-        jobTitle = item.find('a').text.strip()
-        companyName = item.find('span', class_='companyName').text.strip()
-        snippet = item.find('div', class_='job-snippet').text.strip()
-        location = item.find('div', class_='companyLocation').text.strip()
-        id = item.find('a').get('id')
-        # link is in the <a> tag as the title BUT as an href attribute
-        job_link = item.find('a').get('href')
-        # create a job dictionary
-        job = {
-            'id' : id,
-            'title': jobTitle,
-            'company': companyName,
-            # 'location': location,
-            # 'short_description': snippet,
-            'job_link': job_link
-        }
-        # every loop appends a dictionary to the list
-        jobList.append(job)
-    if not jobList:
-        abort("400")
-    return jobList
+            # as of now only job_link is relevant, other elements can be integrated later for added functionalities
+            # job title is in the <a> tag as text
+            jobTitle = item.find('a').text.strip()
+            companyName = item.find('span', class_='companyName').text.strip()
+            snippet = item.find('div', class_='job-snippet').text.strip()
+            location = item.find('div', class_='companyLocation').text.strip()
+            id = item.find('a').get('id')
+            # link is in the <a> tag as the title BUT as an href attribute
+            job_link = item.find('a').get('href')
+            # create a job dictionary
+            job = {
+                'id' : id,
+                'title': jobTitle,
+                'company': companyName,
+                # 'location': location,
+                # 'short_description': snippet,
+                'job_link': job_link
+            }
+            # every loop appends a dictionary to the list
+            jobList.append(job)
+
+        return jobList
 
 # ===========================================================
 
@@ -147,9 +155,9 @@ def pull_listing_data(job_link):
     agent = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36 Vivaldi/5.3.2679.70.'}
     r = requests.get(job_link, headers=agent)
 
-    jobSoup = BeautifulSoup(r.content, 'html.parser')
+    pageSoup = BeautifulSoup(r.content, 'html.parser')
 
-    return jobSoup
+    return pageSoup
 
 
 # ===========================================================
