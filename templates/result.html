@@ -4,19 +4,21 @@
 
 <div class="container mt-4">
 
-    <div class="row align-content-start">
+    <div class="row ">
         <div class="col-8">
-            <h5>{{place.upper()}}</h5>
-            <h5>{{job.upper()}}</h5>
-            <h2>{{countryX}}</h2>
-            <h2>{{pageX}}</h2>
-            <p class="query_log">It took {{timing}} seconds, we found {{counter}} matches!</p>
+            <p>
+                Results for <b>{{job.capitalize()}}</b> in: <b>{{place.capitalize()}}</b> in the first {{pageX}} pages.
+            </p>
+
+            <p class="query_log">It took <b>{{timing}}</b> seconds, we found <b>{{counter}}</b> matches!</p>
         </div>
-        <div class="col-4"><button><a href="/index">Go back</a></button></div>
+        <div class="col-4">
+            <button type="button" class="btn btn-warning btn-lg"><a href="/index">Go back</a></button>
+        </div>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-8 align-items-start">
+    <hr class="warning-line">
+    <div class="row align-items-start">
+        <div class="col-md-8">
             <img src="/static/img/graph.png" alt="graph" width=90%>
         </div>
         <div class="col-6 col-md-4 border-warning border-start">

@@ -11,7 +11,9 @@ counter = 0
 # ===========================================================
 
 def analisis(text, default_dict):
-    global result_dict, counter
+    global result_dict
+    global counter
+
 
     # matches = list that gets populated by every occurence of the key of the dictionary
     matches = []
@@ -114,7 +116,7 @@ def pie_chart(dictionary):
 
 
         fig1, ax1 = plt.subplots()
-        
+
         ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
                     shadow=True, startangle=90)
         ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.

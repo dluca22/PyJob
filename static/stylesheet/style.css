@@ -12,37 +12,30 @@ div{
     align-items: center;
 }
 h1, h3, .presentation {
-    color: white !important;
 
    color: #2a9d8f;
 }
+select {
+    border-color: #0D6EFD;
+    border-radius: 1rem;
 
-.keywords-in-use {
-    background-color: yellow;
+
 }
-.search-result {
-    background-color: #e76f51;
-}
+
 .rounded-3 {
         border-radius: 1.5rem !important;
 }
 
 .default-input {
     font-weight: bolder;
-    color:aliceblue
+    color:black
 }
 
-#search-col{
-    background-color: lightblue;
-}
-#keyword-col{
-    background-color: lightcyan;
-}
 div.border.border-primary{
     border-radius: 20px;
 }
 .verticalLine{
-    border-left: 2px solid #0D6EFD ;
+    border-left: 3px solid #0D6EFD ;
     height: 15px;
 
 }
@@ -50,3 +43,25 @@ div.border.border-primary{
 button > a {
     color : white;
 }
+.keyword-list{
+    display: inline;
+    font-weight: 400;
+    list-style: none;
+
+
+}
+.user-keyword-list {
+    display: inline;
+    list-style: none ;
+    font-weight: bold;
+    font-style: italic;
+    color:blueviolet;
+}
+.warning-line{
+    border-top: 2px solid;
+    border-color:#FFC107;
+    color: #FFC107
+
+}
+
+/*---------------------------- */

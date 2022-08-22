@@ -3,7 +3,7 @@
 {%block title%} index {%endblock%}
 
 {%block body%}
-<section id="presentation" class="container-fluid bg-primary">
+<section id="presentation" class="container-fluid ">
     <div class="container-sm my-2">
         <div class="header">
             <h1>Hello!</h1>
@@ -11,11 +11,8 @@
         </div>
         <div class="presentation">
             <p>This web-app will return, based on your job search and desired location, a list of the most required
-                skills
-                that
-                employers are looking for!</p>
-            <p>Just enter the job you're looking for and your desired location, and you'll be served and updated list of
-                skills
+                skills that recruiters are looking for!</p>
+            <p>Just enter the job you're looking for and the location, and you'll be served and updated list of skills
                 that are being required the most!</p>
 
         </div>
@@ -24,141 +21,112 @@
 <!-- sezione 2 -->
 
 
-<div class="main-section container mt-5 min-vh-100">
+<div class="main-section container my-5">
+    <form action="/search" method="post" id="search-form">
+        <div class="row justify-content-center">
+            <div class="col-4 d-flex justify-content-center ">
+                <!-- checkbox per usa/ita -->
+                <input type="radio" name="country" value="www" checked="checked">
+                <span class="default-input">USA<img src="/static/img/us.svg" width="30px" height="20px"> &ensp; </span>
 
-    <div class="row d-flex align-items-start">
-        <div class="col-4 border border-primary" id="search-col">
+                <input type="radio" name="country" value="it">
+                <span class="default-input">ITA<img src="/static/img/it.svg" width="30px" height="20px"></span>
+            </div>
 
-
-            <!-- form di input con le due inpot box e pulsante -->
-            <form action="/search" method="post">
-                <!-- # inputText di PLACE -->
-                <div class="row g-2 justify-content-center align-items-start">
-                    <div class="col-10 mt-2">
-                        <div class="row">
-                            <input class="form-control rounded-0 rounded-top" type="text" placeholder="City"
-                                aria-label="place" name="place" required>
-                        </div>
-
-
-                        <!-- # inputText di JOB -->
-                        <div class="row">
-                            <input class="form-control rounded-0 rounded-bottom" type="text" placeholder="Job to search"
-                                name="job_search" required>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- inizio radius prechecked values -->
-                <!-- <form action="/search" method="post">
-                <div class="row g-2 justify-content-center align-items-center">
-                    <div class="col-4">
-                        <input type="radio" name="place" value="chicago" checked="checked"><span
-                            class="default-input">Chicago</span>
-                    </div>
-                </div>
-                <div class="row g-2 justify-content-center align-items-center">
-                    <div class="col-4">
-                        <input type="radio" name="job_search" value="junior developer" checked="checked"> <span
-                            class="default-input">junior developer</span>
-                    </div>
-                </div> -->
-                <!-- fine radius -->
-
-                <div class="row col-5 mx-auto mt-2">
-                    <input class="btn btn-primary " type="submit" value="Submit">
-                </div>
-
-                <hr>
-
-                <div class="row ">
-                    <p>Other options:</p>
-                </div>
-
-                <div class="row">
-                    <ul>
-                        <li>pages: &emsp;
-                            <select name="page">
-                                <option value="1">1</option>
-                                {%for i in range(2,6)%}
-                                <option value="{{i}}">{{i}}</option>{%endfor%}
-                            </select>
-
-                        </li>
-
-                        <li>Country:
-                            <input type="radio" name="country" value="it" checked="checked">
-                            <span class="default-input">ITA</span>
-
-                            <span class="verticalLine"></span>
-
-                            <input type="radio" name="country" value="www">
-                            <span class="default-input">USA</span>
-                        </li>
-                    </ul>
-
-
-
-            </form>
+            <div class="col-4">
+                <span> Pages to search: </span>
+                <!-- pages selection -->
+                <select name="page">
+                    <option value="1">1</option>
+                    {%for i in range(2,6)%}
+                    <option value="{{i}}">{{i}}</option>{%endfor%}
+                </select>
+            </div>
         </div>
-    </div>
+
+
+
+
+        <!-- # inputText di PLACE -->
+        <div class="row justify-content-center">
+            <div class="col-6 col-md-4 mt-2">
+                <input class="form-control rounded-0 rounded-top" type="text" placeholder="City" aria-label="place"
+                    name="place" required>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-6 col-md-4 mb-2">
+
+                <!-- # inputText di JOB -->
+                <input class="form-control rounded-0 rounded-bottom" type="text" placeholder="Job to search"
+                    name="job_search" required>
+            </div>
+        </div>
+
+        <!-- submit button -->
+        <div class="row justify-content-center">
+            <div class="col-2  d-flex justify-content-center mt-2">
+                <input class="btn btn-primary " type="submit" value="Submit">
+            </div>
+        </div>
+    </form>
 
 
 
     <!-- sezione a scomparsa -->
-    <div class="col-8 d-flex justify-content-center border border-primary" id="keyword-col">
-        <div class="container">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-2 d-flex" id="keyword-col">
 
-            <div class="row">
-                <div class="row d-grid gap-2 col-4 mx-auto">
+                <a class="btn btn-outline-info my-3" data-bs-toggle="collapse" href="#collapseSection" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Keywords in use
+                </a>
 
-                    <a class="btn btn-primary my-3" data-bs-toggle="collapse" href="#collapseSection" role="button"
-                        aria-expanded="false" aria-controls="collapseExample">
-                        Keywords in use
-                    </a>
-                </div>
             </div>
+        </div>
+        <div class="container my-3-px-2">
             <div class="row">
-                <div class="collapse" id="collapseSection">
-                    <div class="container-sm my-3-px-2">
-                        <div class="keywords-in-use rounded-3">
-                            <!-- form per inserire proprio input -->
-                            <form action="/add_keywords" method="post">
-                                <div class="row g-2 justify-content-center align-items-start">
-                                    <div class="col-8">
-                                        <input class="form-control start" type="text"
-                                            placeholder="Insert,your,keywords,separated,by,commas"
-                                            aria-label="custom_keys" name="custom_keys" required>
-                                    </div>
-                                    <div class="col-2 mx-1"><input class="btn btn-primary mb-3" type="submit"
-                                            value="Add Keywords">
-                                    </div>
-                                </div>
-                                <!-- list of keywords in use -->
-                                <ul>
-                                    {%if user_dict|length > 0%}
-                                    {% for w, n in user_dict.items()%}
-                                    <li style="list-style: none ; color:blueviolet; display: inline;"><b>{{w}} ,
-                                            &emsp; </b>
-                                    </li>
-                                    {%endfor%}
-                                    {%endif%}
-                                </ul>
-                                <ul>
-                                    {% for k, v in dict.items()%}
-                                    <li style="list-style: none ; display: inline;"><b>{{k}} , &emsp; </b></li>
-                                    {%endfor%}
-                                </ul>
+                <div class="collapse border-info border-start border-end" id="collapseSection">
+
+                    <!-- form per inserire proprio input -->
+                    <form action="/add_keywords" method="post">
+                        <div class="row g-2 justify-content-center ">
+                            <div class="col-8 align-self-start">
+                                <input class="form-control border-info" type="text"
+                                    placeholder="Insert,your,keywords,separated,by,commas" aria-label="custom_keys"
+                                    name="custom_keys" required>
+                            </div>
+                            <div class="col-2 mx-1 align-self-start">
+                                <input class="btn btn-info mb-3" type="submit" value="Add Keywords">
+                            </div>
+
                         </div>
-                    </div>
+                    </form>
+
+
+                    <!-- IF PRESENT list of user added keywords -->
+                    {% if user_dict|length > 0 %}
+                        <ul>
+                            {% for w, n in user_dict.items() %}
+                            <li class="user-keyword-list">{{w.capitalize()}} , &emsp;</li>
+                            {%endfor%}
+                            <!-- breakline -->
+                            <hr>
+                        </ul>
+                    {%endif%}
+
+                    <!-- list of keywords in use -->
+                    <ul>
+                        {% for k, v in dict.items()%}
+                        <li class="keyword-list">{{k.capitalize()}} , &emsp;</li>
+                        {%endfor%}
+                    </ul>
                 </div>
             </div>
-
         </div>
     </div>
 
 </div>
-
 
 {%endblock%}

@@ -74,7 +74,10 @@ def start_search():
         # get values from request form
         place = format_entry(request.form['place'])
         job = format_entry(request.form['job_search'])
-        country = request.form['country']
+        if request.form['country'] == 'www':
+            country = 'www'
+        else:
+            country = 'it'
         # page 1 returns value 0 that extract_from_page uses to display
         # works even if not converted to int() ?!?
         page = request.form['page']
