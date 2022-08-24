@@ -1,4 +1,3 @@
-from itertools import count
 import re
 import app
 import matplotlib.pyplot as plt
@@ -8,7 +7,8 @@ import matplotlib.pyplot as plt
 result_dict = {}
 counter = 0
 
-# ===========================================================
+# ==========================================================
+
 def reset():
     global counter
     global result_dict
@@ -16,12 +16,13 @@ def reset():
     counter = 0
     result_dict.clear()
 
-# ===========================================================
+# ==========================================================
+
 def get_count():
     global counter
     return counter
 
-# ===========================================================
+# ==========================================================
 
 def analisis(text, default_dict):
     global result_dict
@@ -53,7 +54,7 @@ def analisis(text, default_dict):
             # else creates a new k:v pair
             result_dict.update({k : v})
 
-# ===========================================================
+# ==========================================================
 
 def elaborate():
     # calls the 2 functions that order and transform the dict to a more readable format
@@ -66,9 +67,7 @@ def elaborate():
 
     return elaborated
 
-
-
-# ===========================================================
+# ==========================================================
 
     # from int values intrasforms to percent float w/ 2 decimal place
 def add_percent(dictionary):
@@ -79,9 +78,10 @@ def add_percent(dictionary):
         dictionary.update({k : [v, float("{:.2f}".format(v *100 / total ))]})
         # only add percent sign to the file writing so it is still a computable number for later use
     return dictionary
-# # ===========================================================
 
-#     # from int values intrasforms to percent float w/ 2 decimal place
+ #==========================================================
+
+ # from int values intrasforms to percent float w/ 2 decimal place
 def percent_calc(dictionary):
     total = sum(dictionary.values())
     for k, v in dictionary.items():

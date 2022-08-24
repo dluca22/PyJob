@@ -8,7 +8,7 @@ angular
 ansible
 api
 applescript
-assembly language
+assembly
 atomation
 autohotkey
 aws
@@ -61,8 +61,6 @@ hacking
 high level assembly
 html
 html5
-ibm basic assembly language
-j
 java
 javascript
 jquery
@@ -71,7 +69,8 @@ ksh
 laravel
 linux
 lua
-mac os
+mac
+os
 machine code
 magento
 microcode

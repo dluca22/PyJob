@@ -3,8 +3,6 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import sys
-import app
-from flask import abort
 
 # then sends to the helper function the description to analize and store relevant data
 
