@@ -8,60 +8,88 @@ body {
 #error {
     color: blue !important;
 }
-div{
+
+div {
     align-items: center;
 }
-h1, h3, .presentation {
 
-   color: #2a9d8f;
+h1,
+h3,
+.presentation {
+
+    color: #0a0754;
 }
+
 select {
-    border-color: #0D6EFD;
-    border-radius: 1rem;
+    border-style: none;
+    border-radius: 13px;
+    width: 40px;
+    text-align: center;
 
+}
 
+select:active {
+    outline: none;
+    box-shadow: none;
+    scroll-behavior: smooth
+}
+
+/* hover di pages to search */
+select:hover {
+    background-color: #0d6dfd33;
+    border-radius: 13px;
 }
 
 .rounded-3 {
-        border-radius: 1.5rem !important;
+    border-radius: 1.5rem !important;
+}
+
+span.default-input:hover {
+    border-bottom: 2px solid #0D6EFD;
 }
 
 .default-input {
     font-weight: bolder;
-    color:black
+    color: black
 }
 
-div.border.border-primary{
+div.border.border-primary {
     border-radius: 20px;
 }
-.verticalLine{
-    border-left: 3px solid #0D6EFD ;
+
+.verticalLine {
+    border-left: 3px solid #0D6EFD;
     height: 15px;
 
 }
 
-button > a {
-    color : white;
+button>a {
+    color: white;
 }
-.keyword-list{
+
+.keyword-list {
     display: inline;
     font-weight: 400;
     list-style: none;
+}
 
-
+a[href="/remove_custom"] {
+    text-decoration: none;
+    font-weight: bolder;
+    
 }
 .user-keyword-list {
     display: inline;
-    list-style: none ;
+    list-style: none;
     font-weight: bold;
     font-style: italic;
-    color:blueviolet;
+    color: blueviolet;
 }
-.warning-line{
-    border-top: 2px solid;
-    border-color:#FFC107;
-    color: #FFC107
 
+.warning-line {
+    border-top: 2px solid;
+    border-color: #FFC107;
+    color: #FFC107
 }
 
 /*---------------------------- */

@@ -21,15 +21,39 @@
 </head>
 
 <body>
-
-    <div class="container-fluid bg-primary">
-        <nav class="navbar navbar-light ">
-            <a class="navbar-brand" href="/">
-                <img src="/static/img/logo_searchbar.png" alt="logo" width="450" height="100">
-            </a>
-
+    <div class="container-fluid">
+    <nav class="navbar  navbar-light ">
+          <a class="navbar-brand" href="/new_search"><img src="/static/img/logo_img.png" alt="logo" width="80" height="78"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav align-self-end">
+              <li class="nav-item">
+                <p class="resource-list" aria-current="page" >Resources:</p>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="https://cs50.harvard.edu/x/2022/project/">CS50 pset</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.freelogodesign.org/">Logo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://github.com/lipis/flag-icons">Icons</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Data sources
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="http://www.indeed.com">Indeed</a></li>
+                    </ul>
+                  </li>
+            </ul>
+          </div>
         </nav>
     </div>
+
 
     {%block body%}
 
