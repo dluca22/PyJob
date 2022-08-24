@@ -1,4 +1,4 @@
-from analize_module import analisis, elaborate
+from analize_module import analisis, elaborate, reset
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -14,6 +14,7 @@ from flask import abort
 # ===========================================================
 def build_dict():
 
+    reset()
     default_dict = {}
 
     with open("list_of_keys.txt", "r") as file:
@@ -24,17 +25,20 @@ def build_dict():
 
 # ===========================================================
 
-def search(country , place, job_search, user_dict=None, page=1):
+def search(country , place, job_search, user_dict={}, page=0):
     # empty set
 
     searched_ids = set()
 
     default_dict = build_dict()
+    # if user dict is defined, add it
+    if user_dict:
+        default_dict.update(user_dict)
 
-    jobList = extract_from_page(country=country, place=place, job_search=job_search)
+    jobList = extract_from_page(country=country, place=place, job_search=job_search, page=page)
 
     if not jobList:
-        return "code 37" #invalid
+        return "400 - Invalid search" #invalid
 
     else:
         # se il job id non è nella lista, pull description dal suo link
@@ -49,9 +53,10 @@ def search(country , place, job_search, user_dict=None, page=1):
                 description = get_description(page_soup)
 
             # for every job "id" page that has not yet been analized call analisis()
-            analisis(description, default_dict)
+                analisis(description, default_dict)
 
         # after parsing all, launch elaborate()
+
         elaborate()
         # except TypeError:
                 # app.error("messaggio except")
@@ -71,18 +76,18 @@ def format_entry(entry):
 
 # ===========================================================
 
-def extract_from_page(country, place, job_search, page=1):
+def extract_from_page(country, place, job_search, page):
     # empty job list to be filled with dicts
     jobList = []
     if page == 1:
         # se si cerca pagina 1 il valore passato che accetta url è 0
         jobList = transform(extract(country=country, page=0, place=place, job_search=job_search))
             #if page argument given >1 , loop over and .extend the jobList adding all job dictionaries
-    elif page != 1:
+    elif page > 1:
         # transform value *10 because url indeed uses 0, 10, 20, 30 to 40(=page 5)
         page = page * 10
 
-        for p in range(1, page , 10):
+        for p in range(0, page , 10):
             jobList.extend(transform(extract(country=country, page=p, place=place, job_search=job_search)))
     if not jobList:
         return None
@@ -128,8 +133,6 @@ def transform(soup):
             # job title is in the <a> tag as text
             jobTitle = item.find('a').text.strip()
             companyName = item.find('span', class_='companyName').text.strip()
-            snippet = item.find('div', class_='job-snippet').text.strip()
-            location = item.find('div', class_='companyLocation').text.strip()
             id = item.find('a').get('id')
             # link is in the <a> tag as the title BUT as an href attribute
             job_link = item.find('a').get('href')

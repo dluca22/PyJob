@@ -1,6 +1,6 @@
+from itertools import count
 import re
 import app
-import time
 import matplotlib.pyplot as plt
 
 
@@ -9,11 +9,23 @@ result_dict = {}
 counter = 0
 
 # ===========================================================
+def reset():
+    global counter
+    global result_dict
+
+    counter = 0
+    result_dict.clear()
+
+# ===========================================================
+def get_count():
+    global counter
+    return counter
+
+# ===========================================================
 
 def analisis(text, default_dict):
     global result_dict
     global counter
-
 
     # matches = list that gets populated by every occurence of the key of the dictionary
     matches = []
@@ -31,29 +43,29 @@ def analisis(text, default_dict):
             # just add 1 to the dict
             default_dict[key] += 1
 
+    # has to be outside loop!! (was indented wrong previously)
         # new dict with only the keys that are not 0
-        for k, v in default_dict.items():
-            if v != 0:
-                # if key is already present, adds the value
-                if  k in result_dict:
-                    result_dict[k] += v
-                # else creates a new k:v pair
-                result_dict.update({k : v})
+    for k, v in default_dict.items():
+        if v != 0:
+            # if key is already present, adds the value
+            if  k in result_dict:
+                result_dict[k] += v
+            # else creates a new k:v pair
+            result_dict.update({k : v})
 
 # ===========================================================
 
 def elaborate():
     # calls the 2 functions that order and transform the dict to a more readable format
     global result_dict
-    global counter
 
     elaborated = add_percent(sort_dictionary(result_dict))
 
-    finish_time = time.time()
 
     pie_chart(result_dict)
 
-    return elaborated, finish_time, counter
+    return elaborated
+
 
 
 # ===========================================================
