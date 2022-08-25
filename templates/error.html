@@ -6,18 +6,24 @@
 <div class="container-fluid text-center">
     <div class="container mt-5 mx-3">
 
-        <div class="row">
-            <h1 id="error">{{code}}</h1>
+        <div class="row justify-content-center">
+            <h1 id="error-code">{{code}}</h1>
         </div>
-        <div class="row mt-3 ">
+        <div class="row justify-content-center mt-3 ">
             <div class="col-10 col-lg-5 mt-3">
+                <h4 id="error-msg">{{msg}}</h4>
+
                 {% if code == 400 %}
-                <p>{{msg}}</p>
                 <p>The request was either for the <u>wrong conutry</u>, or the <u>city wasn't found</u></p>
+
                 {% elif code == 403 %}
-                <p>{{msg}}</p>
+                <!-- only msg -->
+                {% elif code == 406 %}
+
+                <p>You have to fill <u>both</u> input fields</p>
                 {% endif %}
             </div>
+        </div>
             <!-- img hidden until lg then show block -->
             <div class="col-md-7 d-none d-lg-block"><img src="/static/img/error_test.png" alt="error image"
                     width="400px" height="400px"></div>
@@ -27,7 +33,7 @@
 
 <div class="row my-4">
 
-    <button type="button" class="btn btn-warning btn-lg"><a href="/index">Go back</a></button>
+    <button type="button" id="back-error-button" class="btn btn-danger btn-lg"><a href="/index">Go back</a></button>
 </div>
 
 {% endblock %}

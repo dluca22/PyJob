@@ -13,10 +13,10 @@
                 </div>
                 <div class="presentation">
                     <p>This is a web-app that will return, based on your job search and desired location, a list of the
-                        most required skills that recruiters are looking for!</p>
+                        most skills that recruiters are looking for!</p>
                     <p>Just enter the job you're looking for and the location, and you'll be served and updated list of
                         skills
-                        that are being required the most!</p>
+                        that are being the most!</p>
 
                 </div>
             </div>
@@ -56,7 +56,7 @@
         <div class="row justify-content-center">
             <div class="col-8 col-md-5 col-lg-4 mt-2">
                 <input class="form-control rounded-0 rounded-top" type="text" placeholder="City" aria-label="place"
-                    name="place" required>
+                    name="place">
             </div>
         </div>
         <div class="row justify-content-center">
@@ -64,18 +64,29 @@
 
                 <!-- # inputText di JOB -->
                 <input class="form-control rounded-0 rounded-bottom" type="text" placeholder="Job to search"
-                    name="job_search" required>
+                    name="job_search">
             </div>
         </div>
 
         <!-- submit button -->
         <div class="row justify-content-center">
             <div class="col-2  d-flex justify-content-center mt-2">
-                <input class="btn btn-primary " type="submit" value="Submit">
+                <input onclick="show_loading()" class="btn btn-primary " type="submit" value="Submit">
             </div>
         </div>
     </form>
 
+    <!-- loading animation -->
+
+    <div class="row justify-content-center" id="loading">
+        <div class="col-4 d-flex justify-content-between">
+            <h3>Loading... </h3>
+            <img src="/static/img/loading.gif" height=60px width="60px" alt="loading animation">
+        </div>
+        <div class="col-10 d-flex justify-content-around">
+            <p>this may take up to a minute</p>
+        </div>
+    </div>
 
 
     <!-- sezione a scomparsa -->
@@ -99,8 +110,7 @@
                         <div class="row justify-content-center ">
                             <div class="col-10 col-md-7 align-self-start">
                                 <input class="form-control border-info" type="text"
-                                    placeholder="Insert a list of keywords" aria-label="custom_keys"
-                                    name="custom_keys">
+                                    placeholder="Insert a list of keywords" aria-label="custom_keys" name="custom_keys">
                             </div>
                             <div class="col-2 col-md-4 mx-1 align-self-start">
                                 <input class="btn btn-info mb-3" type="submit" value="Add Keywords">
@@ -108,6 +118,7 @@
 
                         </div>
                     </form>
+
 
 
                     <!-- IF PRESENT list of user added keywords -->
@@ -143,5 +154,11 @@
     </div>
 
 </div>
+<script>
+    function show_loading() {
+        let loads = document.getElementById('loading');
+        loads.style.display = 'flex';
+    }
+</script>
 
 {%endblock%}

@@ -1,5 +1,3 @@
-from glob import glob
-import logging
 import time
 from flask import Flask, render_template, request, redirect, flash, url_for
 from look_module import build_dict, format_entry, search
@@ -9,8 +7,6 @@ from analize_module import elaborate, get_count
 app = Flask(__name__)
 app.secret_key = '01101100'
 # app.config['PROPAGATE_EXCEPTIONS'] = True REMOVE??
-
-logging.basicConfig(level=logging.DEBUG)
 
 default_dict = {}
 user_dict = {}
@@ -55,6 +51,8 @@ def start_search():
         # get values from request form
         place = format_entry(request.form['place'])
         job = format_entry(request.form['job_search'])
+        if not place or not job:
+            return error(406, msg="Missing field")
         if request.form['country'] == 'www':
             country = 'www'
         else:

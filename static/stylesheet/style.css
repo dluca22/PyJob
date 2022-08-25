@@ -76,7 +76,7 @@ button>a {
 a[href="/remove_custom"] {
     text-decoration: none;
     font-weight: bolder;
-    
+
 }
 .user-keyword-list {
     display: inline;
@@ -90,6 +90,27 @@ a[href="/remove_custom"] {
     border-top: 2px solid;
     border-color: #FFC107;
     color: #FFC107
+
+}
+#error-code{
+    color: rgb(70, 70, 70)
+}
+#error-msg{
+    color:rgb(186, 0, 0)
+}
+#back-error-button>a{
+    text-decoration: none;
+}
+#back-error-button>a:hover{
+    text-decoration: none;
+    color:rgb(255, 204, 0);
+}
+#loading{
+    display:flex;
+}
+.col-10.d-flex.justify-content-around > p {
+    font-size: small;
+    color: rgb(196, 8, 8)
 }
 
 /*---------------------------- */
