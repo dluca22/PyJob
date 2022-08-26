@@ -3,16 +3,12 @@ body {
     align-items: center;
     flex-direction: column;
 
+    background-image: url('/static/img/circ_half.png') no-repeat ;
+    background-position-y: -100%;
+    background-position-x: 80%;
 }
 
-#error {
-    color: blue !important;
-}
-
-div {
-    align-items: center;
-}
-
+/* index page */
 h1,
 h3,
 .presentation {
@@ -20,49 +16,40 @@ h3,
     color: #0a0754;
 }
 
+/* loading animation */
+#loading {
+    display: none;
+}
+
+.col-10.d-flex.justify-content-around>p {
+    font-size: small;
+    color: rgb(196, 8, 8)
+}
+/* fine loading animation */
+
+/* tendina select numeri pagina */
 select {
     border-style: none;
     border-radius: 13px;
     width: 40px;
     text-align: center;
-
 }
-
-select:active {
-    outline: none;
-    box-shadow: none;
-    scroll-behavior: smooth
-}
-
-/* hover di pages to search */
 select:hover {
     background-color: #0d6dfd33;
-    border-radius: 13px;
+    border-radius: 9px;
 }
+/*fine tendina select*/
 
-.rounded-3 {
-    border-radius: 1.5rem !important;
-}
-
-span.default-input:hover {
-    border-bottom: 2px solid #0D6EFD;
-}
 
 .default-input {
     font-weight: bolder;
     color: black
 }
-
-div.border.border-primary {
-    border-radius: 20px;
+.default-input:hover {
+    color: #FFC107;
 }
 
-.verticalLine {
-    border-left: 3px solid #0D6EFD;
-    height: 15px;
-
-}
-
+/* button have text color white */
 button>a {
     color: white;
 }
@@ -73,11 +60,12 @@ button>a {
     list-style: none;
 }
 
+/* button X to remove keys */
 a[href="/remove_custom"] {
     text-decoration: none;
     font-weight: bolder;
-
 }
+
 .user-keyword-list {
     display: inline;
     list-style: none;
@@ -86,31 +74,30 @@ a[href="/remove_custom"] {
     color: blueviolet;
 }
 
+/* decoration line for result */
 .warning-line {
     border-top: 2px solid;
     border-color: #FFC107;
     color: #FFC107
-
 }
-#error-code{
+
+
+/* error page */
+#error-code {
     color: rgb(70, 70, 70)
 }
-#error-msg{
-    color:rgb(186, 0, 0)
+
+#error-msg {
+    color: rgb(186, 0, 0)
 }
-#back-error-button>a{
+
+#back-error-button>a {
     text-decoration: none;
 }
-#back-error-button>a:hover{
+
+#back-error-button>a:hover {
     text-decoration: none;
-    color:rgb(255, 204, 0);
-}
-#loading{
-    display:flex;
-}
-.col-10.d-flex.justify-content-around > p {
-    font-size: small;
-    color: rgb(196, 8, 8)
+    color: rgb(255, 204, 0);
 }
 
 /*---------------------------- */

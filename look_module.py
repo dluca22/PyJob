@@ -4,9 +4,6 @@ import requests
 import re
 import sys
 
-# then sends to the helper function the description to analize and store relevant data
-
-#  Estrae la HomePage e tira fuori un "object" che rappresenta il DOM della webpage
 
 
 # ===========================================================
@@ -56,11 +53,6 @@ def search(country , place, job_search, user_dict={}, page=0):
         # after parsing all, launch elaborate()
 
         elaborate()
-        # except TypeError:
-                # app.error("messaggio except")
-
-
-
 
 # ===========================================================
 
@@ -78,7 +70,7 @@ def extract_from_page(country, place, job_search, page):
     # empty job list to be filled with dicts
     jobList = []
     if page == 1:
-        # se si cerca pagina 1 il valore passato che accetta url è 0
+        # if page 1 is searched, the url requests "0" as main page
         jobList = transform(extract(country=country, page=0, place=place, job_search=job_search))
             #if page argument given >1 , loop over and .extend the jobList adding all job dictionaries
     elif page > 1:
@@ -116,7 +108,7 @@ def extract(country, page, place, job_search):
 # ===========================================================
 
 
-# gets all the divs
+# gets all the job offer divs
 def transform(soup):
     jobList = []
     # all the card divs
@@ -127,20 +119,17 @@ def transform(soup):
     else:
         for item in divs:
 
-            # as of now only job_link is relevant, other elements can be integrated later for added functionalities
             # job title is in the <a> tag as text
             jobTitle = item.find('a').text.strip()
             companyName = item.find('span', class_='companyName').text.strip()
             id = item.find('a').get('id')
-            # link is in the <a> tag as the title BUT as an href attribute
+            # get link from the <a> href attribute
             job_link = item.find('a').get('href')
             # create a job dictionary
             job = {
                 'id' : id,
                 'title': jobTitle,
                 'company': companyName,
-                # 'location': location,
-                # 'short_description': snippet,
                 'job_link': job_link
             }
             # every loop appends a dictionary to the list
@@ -167,7 +156,6 @@ def pull_listing_data(job_link):
 def get_description(jobSoup):
 
     description = jobSoup.find('div', {'id': 'jobDescriptionText'}).text.strip()
-
     return description.strip().lower()
 
 

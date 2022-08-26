@@ -22,7 +22,6 @@ def index():
     if request.method == "GET":
         global default_dict
 
-        # maybe do it as a list? since gets built already in look_module
         default_dict = build_dict()
         # can't join user dict here because would be merged in the main dict and not display as separate keys
 
@@ -75,10 +74,10 @@ def start_search():
         total_time = round((time.time() - start_time),2)
 
 
-        return render_template("result.html", place=place, job=job, dict=default_dict, result_dict=ordered_result,total_time=total_time, counter=get_count(), pageX=page, countryX=country)
+        return render_template("result.html", place=place, job=job, result_dict=ordered_result,total_time=total_time, counter=get_count(), pageX=page, countryX=country)
 
-    # if method 'get'
-    else:
+    
+    elif request.method == "GET":
         return error(403, msg="You can't do THAT /: ")
 
 
@@ -118,11 +117,6 @@ def add_keywords():
         else:
             flash("No additions.")
             return redirect(url_for("index"))
-
-        # return index()
-        # return redirect(url_for("/"))
-        # oppure
-        # return redirect(url_for('index'), method="POST")
 
 # =============================================================
 @app.route("/new_search")
