@@ -1,12 +1,33 @@
 body {
     display: flex;
+
     align-items: center;
     flex-direction: column;
-
-    background-image: url('/static/img/circ_half.png') no-repeat ;
-    background-position-y: -100%;
-    background-position-x: 80%;
 }
+
+.low-opacity-bg-image {
+    --bg-image:  url('/static/img/circleswirl.svg');
+    --bg-image-opacity: 0.35;
+    display: grid;
+    /* position: relative; */
+    place-content: center;
+
+    position: relative;
+    isolation: isolate;
+  }
+
+  .low-opacity-bg-image::after {
+    content: "";
+    position:absolute;
+    z-index: -1;
+    inset: 0;
+    opacity: var(--bg-image-opacity);
+    background-image: var(--bg-image);
+    background-size:100%;
+    background-position: 100px 150px;
+    background-repeat: no-repeat;
+    offset: 200px;
+  }
 
 /* index page */
 h1,

@@ -1,7 +1,6 @@
 .js
 .net
 algol
-ams
 android
 android studio
 angular
@@ -9,14 +8,12 @@ ansible
 api
 applescript
 assembly
-atomation
+automation
 autohotkey
 aws
 azure
 back-end
 bash
-basic
-batch
 bitbucket
 blockchain
 brew
@@ -25,20 +22,18 @@ c#
 c+
 cloud
 cobol
-component pascal
 css
 css3
 curl
 dart
 database
-dbase
 delphi
+devops
+dev-ops
 django
 docker
-ecmascript
 excel
 fastapi
-ffp
 fireship
 flask
 flutter
@@ -48,24 +43,23 @@ front-end
 ftp
 full stack
 g-code
+gcc
 git
 github
 gitlab
 gnu
-go
 go!
 google
 google cloud
 hack
 hacking
-high level assembly
 html
 html5
 java
 javascript
 jquery
 kotlin
-ksh
+kvm
 laravel
 linux
 lua
@@ -73,7 +67,6 @@ mac
 os
 machine code
 magento
-microcode
 microsoft
 mongodb
 native
@@ -96,8 +89,8 @@ rust
 scala
 scilab
 scratch
-sequel
 server
+shell
 sql
 ssh
 swift
@@ -106,9 +99,8 @@ terraform
 typescript
 unit testing
 unity
-unix shell
+unix
 vagrant
-virtual
 visual basic
 visual studio
 vpn

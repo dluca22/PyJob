@@ -74,9 +74,9 @@ def start_search():
         total_time = round((time.time() - start_time),2)
 
 
-        return render_template("result.html", place=place, job=job, result_dict=ordered_result,total_time=total_time, counter=get_count(), pageX=page, countryX=country)
+        return render_template("result.html", place=request.form['place'], job=request.form['job_search'], result_dict=ordered_result,total_time=total_time, counter=get_count(), pageX=page, countryX=country)
 
-    
+
     elif request.method == "GET":
         return error(403, msg="You can't do THAT /: ")
 

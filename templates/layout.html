@@ -21,9 +21,11 @@
 </head>
 
 <body>
+  <div class="low-opacity-bg-image">
+
   <div class="container-fluid">
     <nav class="navbar  navbar-light ">
-      <a class="navbar-brand" href="/new_search"><img src="/static/img/ds1.png" alt="logo" 
+      <a class="navbar-brand" href="/new_search"><img src="/static/img/ds1.png" alt="logo"
           height="78"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,10 +77,12 @@
   </div>
 
 
+    {%block body%}
 
-  {%block body%}
+    {%endblock%}
+  </div>
 
-  {%endblock%}
+
 </body>
 
 </html>
