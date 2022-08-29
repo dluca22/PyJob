@@ -12,7 +12,6 @@ automation
 autohotkey
 aws
 azure
-back-end
 bash
 bitbucket
 blockchain
