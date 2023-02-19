@@ -23,3 +23,8 @@ My only source of data at the moment is Indeed US and Indeed ITA, however in the
 
 My plan is to publish this web application on a hosting platform in the hope that it will be a useful resource for anyone looking for a new career
 
+## How to use it:
+
+1. `pip install requirements.txt`
+2. `flask --app app run`
+3. open browser on port `localhost:5000`
